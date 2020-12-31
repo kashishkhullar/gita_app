@@ -8,6 +8,13 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
+      drawer: Drawer(),
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        backgroundColor: Colors.amber[600],
+        elevation: 0.0,
+        iconTheme: IconThemeData(color: Colors.white),
+      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -15,7 +22,7 @@ class HomeScreen extends StatelessWidget {
             clipper: HomeClipper(),
             child: Container(
               width: double.infinity,
-              height: 250,
+              height: 300,
               padding: EdgeInsets.only(bottom: 40),
               decoration: BoxDecoration(
                 color: Colors.amber[600],
