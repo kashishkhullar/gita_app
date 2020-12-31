@@ -48,7 +48,7 @@ class HomeScreen extends StatelessWidget {
           ),
           RaisedButton(
             onPressed: () {},
-            color: Theme.of(context).accentColor,
+            color: Colors.amber[600],
             child: Container(
               padding: const EdgeInsets.all(8.0),
               child: Text(
