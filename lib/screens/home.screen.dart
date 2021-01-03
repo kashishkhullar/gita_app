@@ -2,10 +2,15 @@ import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:gita_app/helpers/home.clipper.dart';
+import 'package:gita_app/models/GitaData.dart';
+import 'package:gita_app/providers/data.provider.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final gitaData = Provider.of<GitaData>(context);
+
     return Scaffold(
       backgroundColor: Colors.white,
       drawer: Drawer(),
@@ -47,7 +52,9 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
           RaisedButton(
-            onPressed: () {},
+            onPressed: () {
+              print(gitaData == null ? "loading" : gitaData.getChapter(1));
+            },
             color: Colors.amber[600],
             child: Container(
               padding: const EdgeInsets.all(8.0),
