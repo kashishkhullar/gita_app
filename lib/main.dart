@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gita_app/providers/data.provider.dart';
+import 'package:gita_app/screens/chapters.screen.dart';
 import 'package:gita_app/screens/home.screen.dart';
 import 'package:provider/provider.dart';
 
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         home: HomeScreen(),
+        routes: {ChaptersScreen.routeName: (context) => ChaptersScreen()},
       ),
     );
   }
