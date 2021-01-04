@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:gita_app/models/GitaData.dart';
 import 'package:gita_app/providers/data.provider.dart';
 import 'package:gita_app/screens/chapters.screen.dart';
 import 'package:gita_app/screens/home.screen.dart';
@@ -12,7 +14,13 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return FutureProvider(
+    // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    //   statusBarColor: Colors.transparent,
+    //   systemNavigationBarColor: Colors.black,
+    // ));
+    SystemChrome.setEnabledSystemUIOverlays([]);
+
+    return FutureProvider<GitaData>(
       create: (context) => DataProvider().loadGitaData(context),
       child: MaterialApp(
         title: 'Flutter Demo',
