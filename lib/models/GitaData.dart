@@ -12,7 +12,7 @@ class GitaData {
     return gitaData["chapters"][chapterNumber]["chapter_summary"];
   }
 
-  List<Chapter> get chapters {
+  List<Chapter> getChapters() {
     var chapterList = List<Chapter>();
 
     Map<String, dynamic> chapterData = gitaData["chapters"];
