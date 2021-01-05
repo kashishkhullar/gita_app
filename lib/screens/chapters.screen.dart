@@ -24,7 +24,7 @@ class ChaptersScreen extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              margin: EdgeInsets.only(top: 50),
+              margin: EdgeInsets.only(top: 100, bottom: 50),
               width: double.infinity,
               child: Text(
                 "अध्यायों की सूची",
