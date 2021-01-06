@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gita_app/models/Chapter.dart';
 import 'package:gita_app/models/GitaData.dart';
+import 'package:gita_app/screens/verses.screen.dart';
 import 'package:provider/provider.dart';
 
 class ChaptersScreen extends StatelessWidget {
@@ -56,49 +57,58 @@ class ChaptersScreen extends StatelessWidget {
                   ),
                   elevation: 4,
                   margin: EdgeInsets.all(10),
-                  child: Column(
-                    children: [
-                      Container(
-                        height: 150,
-                        width: double.infinity,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(30),
-                            topRight: Radius.circular(30),
-                          ),
-                          child: Image.asset(
-                            "assets/images/chapters/${index + 1}.jpg",
-                            // height: 150,
-                            fit: BoxFit.fitWidth,
-                            // width: 100,
-                          ),
-                        ),
-                      ),
-                      Container(
-                        height: 150,
-                        padding: EdgeInsets.all(20),
-                        child: Column(
-                          children: [
-                            Text(
-                              "अध्याय ${chapterList[index].chapter_number}",
-                              style: TextStyle(
-                                fontSize: 40,
-                                color: Colors.amber[600],
-                                fontWeight: FontWeight.w700,
+                  child: InkWell(
+                    splashColor: Colors.amber,
+                    onTap: () => Navigator.of(context).pushNamed(
+                        VersesScreen.routeName,
+                        arguments: {"chapterNumber": index + 1}),
+                    child: Column(
+                      children: [
+                        Container(
+                          height: 150,
+                          width: double.infinity,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(30),
+                              topRight: Radius.circular(30),
+                            ),
+                            child: Hero(
+                              tag: index + 1,
+                              child: Image.asset(
+                                "assets/images/chapters/${index + 1}.jpg",
+                                // height: 150,
+                                fit: BoxFit.fitWidth,
+                                // width: 100,
                               ),
                             ),
-                            Text(
-                              chapterList[index].name,
-                              style: TextStyle(
-                                fontSize: 35,
-                                color: Colors.amber[600],
-                                fontWeight: FontWeight.w100,
-                              ),
-                            ),
-                          ],
+                          ),
                         ),
-                      ),
-                    ],
+                        Container(
+                          height: 150,
+                          padding: EdgeInsets.all(20),
+                          child: Column(
+                            children: [
+                              Text(
+                                "अध्याय ${chapterList[index].chapter_number}",
+                                style: TextStyle(
+                                  fontSize: 40,
+                                  color: Colors.amber[600],
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                              Text(
+                                chapterList[index].name,
+                                style: TextStyle(
+                                  fontSize: 35,
+                                  color: Colors.amber[600],
+                                  fontWeight: FontWeight.w100,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

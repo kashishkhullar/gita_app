@@ -4,6 +4,7 @@ import 'package:gita_app/models/GitaData.dart';
 import 'package:gita_app/providers/data.provider.dart';
 import 'package:gita_app/screens/chapters.screen.dart';
 import 'package:gita_app/screens/home.screen.dart';
+import 'package:gita_app/screens/verses.screen.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -41,7 +42,10 @@ class MyApp extends StatelessWidget {
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         home: HomeScreen(),
-        routes: {ChaptersScreen.routeName: (context) => ChaptersScreen()},
+        routes: {
+          ChaptersScreen.routeName: (context) => ChaptersScreen(),
+          VersesScreen.routeName: (context) => VersesScreen(),
+        },
       ),
     );
   }

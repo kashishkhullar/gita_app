@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:gita_app/models/Chapter.dart';
+import 'package:gita_app/models/Verse.dart';
 
 class GitaData {
   final Map<String, dynamic> gitaData;
@@ -29,5 +30,29 @@ class GitaData {
       chapterList.add(chapter);
     }
     return chapterList;
+  }
+
+  List<Verse> getVerses(int chapterNumber) {
+    var verseList = List<Verse>();
+
+    List<dynamic> verseNumbers =
+        gitaData["chapters"]["$chapterNumber"]["verse_numbers"];
+
+    Map<String, dynamic> verseData = gitaData["verses"]["$chapterNumber"];
+
+    for (var verseNumber in verseNumbers) {
+      var verse = Verse(
+        meaning: verseData["$verseNumber"]["meaning"],
+        text: verseData["$verseNumber"]["text"],
+        verseNumber: verseData["$verseNumber"]["verse_number"],
+        wordMeanings: verseData["$verseNumber"]["word_meanings"],
+      );
+      verseList.add(verse);
+    }
+    return verseList;
+  }
+
+  int countVersesInChapter(int chapterNumber) {
+    return gitaData["chapters"]["$chapterNumber"]["verse_numbers"].length;
   }
 }
