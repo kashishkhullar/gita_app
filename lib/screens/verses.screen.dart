@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gita_app/models/GitaData.dart';
 import 'package:gita_app/models/Verse.dart';
 import 'package:provider/provider.dart';
+import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 class VersesScreen extends StatefulWidget {
   static final String routeName = "/verses";
@@ -75,14 +76,15 @@ class _VersesScreenState extends State<VersesScreen> {
                 child: PageView.builder(
                   physics: ClampingScrollPhysics(),
                   itemCount: verseList.length,
-                  controller: PageController(viewportFraction: 0.8),
+                  controller: PageController(viewportFraction: 0.7),
                   onPageChanged: (int changedPageNumber) {
                     setState(() => _pageNumber = changedPageNumber);
                   },
                   itemBuilder: (_, index) {
                     return Transform.scale(
-                      scale: index == _pageNumber ? 1 : 0.9,
+                      scale: index == _pageNumber ? 0.9 : 0.8,
                       child: Card(
+                        margin: EdgeInsets.symmetric(vertical: 30),
                         elevation: 20,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30)),
@@ -131,6 +133,33 @@ class _VersesScreenState extends State<VersesScreen> {
               ),
             ),
           ),
+          SlidingUpPanel(
+            collapsed: Column(
+              children: [
+                Icon(Icons.drag_handle),
+                Text("अनुवाद और अर्थ पढ़ने के लिए ऊपर खिचिये",
+                    style: TextStyle(
+                      fontSize: 15,
+                    ))
+              ],
+            ),
+            panelSnapping: true,
+            backdropEnabled: true,
+            backdropColor: Theme.of(context).primaryColorDark,
+            minHeight: MediaQuery.of(context).size.height * 0.05,
+            maxHeight: MediaQuery.of(context).size.height * 0.8,
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(50), topRight: Radius.circular(50)),
+            panel: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Text("This is the sliding Widget"),
+                Text("This is the sliding Widget"),
+                Text("This is the sliding Widget"),
+                Text("This is the sliding Widget"),
+              ],
+            ),
+          )
         ],
       ),
     );
