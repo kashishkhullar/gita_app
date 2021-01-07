@@ -19,6 +19,10 @@ class MyApp extends StatelessWidget {
       statusBarColor: Colors.transparent,
       systemNavigationBarColor: Colors.transparent,
     ));
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     // SystemChrome.setEnabledSystemUIOverlays([]);
 
     return FutureProvider<GitaData>(
