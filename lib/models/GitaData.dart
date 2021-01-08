@@ -8,12 +8,22 @@ class GitaData {
 
   GitaData(this.gitaData);
 
-  String getChapter(String chapterNumber) {
-    print(gitaData["chapters"][chapterNumber]);
-    return gitaData["chapters"][chapterNumber]["chapter_summary"];
+  Chapter getChapter(String chapterNumber) {
+    Map<String, dynamic> chapterData = gitaData["chapters"];
+    print("getchaptercalled");
+    var chapter = Chapter(
+      chapter_number: chapterData[chapterNumber]["chapter_number"],
+      chapter_summary: chapterData[chapterNumber]["chapter_summary"],
+      name: chapterData[chapterNumber]["name"],
+      name_meaning: chapterData[chapterNumber]["name_meaning"],
+      verse_numbers: chapterData[chapterNumber]["verse_numbers"],
+      verses_count: chapterData[chapterNumber]["verse_count"],
+    );
+    return chapter;
   }
 
   List<Chapter> getChapters() {
+    print("getchapter s called");
     var chapterList = List<Chapter>();
 
     Map<String, dynamic> chapterData = gitaData["chapters"];

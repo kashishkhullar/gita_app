@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gita_app/models/Chapter.dart';
 import 'package:gita_app/models/GitaData.dart';
+import 'package:gita_app/screens/chapter_detail.screen.dart';
 import 'package:gita_app/screens/verses.screen.dart';
 import 'package:provider/provider.dart';
 
@@ -9,6 +10,8 @@ class ChaptersScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("CHAPTERS BUILD");
+
     final gitaData = Provider.of<GitaData>(context);
     final List<Chapter> chapterList =
         gitaData == null ? [] : gitaData.getChapters();
@@ -60,8 +63,8 @@ class ChaptersScreen extends StatelessWidget {
                   child: InkWell(
                     splashColor: Colors.amber,
                     onTap: () => Navigator.of(context).pushNamed(
-                        VersesScreen.routeName,
-                        arguments: {"chapterNumber": index + 1}),
+                        ChapterDetailScreen.routeName,
+                        arguments: index + 1),
                     child: Column(
                       children: [
                         Container(

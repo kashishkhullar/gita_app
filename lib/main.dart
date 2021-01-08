@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gita_app/models/GitaData.dart';
 import 'package:gita_app/providers/data.provider.dart';
+import 'package:gita_app/screens/chapter_detail.screen.dart';
 import 'package:gita_app/screens/chapters.screen.dart';
 import 'package:gita_app/screens/home.screen.dart';
 import 'package:gita_app/screens/verses.screen.dart';
@@ -15,20 +16,25 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    print("MAIN BUILD");
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
       systemNavigationBarColor: Colors.transparent,
+      // statusBarColor:
     ));
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
+
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-    // SystemChrome.setEnabledSystemUIOverlays([]);
+    // SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
 
     return FutureProvider<GitaData>(
       create: (context) => DataProvider().loadGitaData(context),
       child: MaterialApp(
-        title: 'Flutter Demo',
+        debugShowCheckedModeBanner: false,
+        title: 'Gita',
         theme: ThemeData(
           // This is the theme of your application.
           //
@@ -48,6 +54,7 @@ class MyApp extends StatelessWidget {
         home: HomeScreen(),
         routes: {
           ChaptersScreen.routeName: (context) => ChaptersScreen(),
+          ChapterDetailScreen.routeName: (context) => ChapterDetailScreen(),
           VersesScreen.routeName: (context) => VersesScreen(),
         },
       ),
