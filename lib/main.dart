@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:gita_app/config/sizing.config.dart';
+import 'package:gita_app/config/styling.config.dart';
 import 'package:gita_app/models/GitaData.dart';
 import 'package:gita_app/providers/data.provider.dart';
 import 'package:gita_app/screens/chapter_detail.screen.dart';
@@ -9,53 +10,34 @@ import 'package:gita_app/screens/verses.screen.dart';
 import 'package:provider/provider.dart';
 
 void main() {
+  // जय श्री कृष्णा
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    print("MAIN BUILD");
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
-      systemNavigationBarColor: Colors.transparent,
-      // statusBarColor:
-    ));
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
-
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ]);
-    // SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
-
     return FutureProvider<GitaData>(
       create: (context) => DataProvider().loadGitaData(context),
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Gita',
-        theme: ThemeData(
-          // This is the theme of your application.
-          //
-          // Try running your application with "flutter run". You'll see the
-          // application has a blue toolbar. Then, without quitting the app, try
-          // changing the primarySwatch below to Colors.green and then invoke
-          // "hot reload" (press "r" in the console where you ran "flutter run",
-          // or simply save your changes to "hot reload" in a Flutter IDE).
-          // Notice that the counter didn't reset back to zero; the application
-          // is not restarted.
-          primarySwatch: Colors.amber,
-          // This makes the visual density adapt to the platform that you run
-          // the app on. For desktop platforms, the controls will be smaller and
-          // closer together (more dense) than on mobile platforms.
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-        ),
-        home: HomeScreen(),
-        routes: {
-          ChaptersScreen.routeName: (context) => ChaptersScreen(),
-          ChapterDetailScreen.routeName: (context) => ChapterDetailScreen(),
-          VersesScreen.routeName: (context) => VersesScreen(),
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          return OrientationBuilder(
+            builder: (context, orientation) {
+              SizeConfig().init(constraints, orientation);
+              return MaterialApp(
+                debugShowCheckedModeBanner: false,
+                title: 'Gita',
+                theme: AppTheme.lightTheme,
+                home: HomeScreen(),
+                routes: {
+                  ChaptersScreen.routeName: (context) => ChaptersScreen(),
+                  ChapterDetailScreen.routeName: (context) =>
+                      ChapterDetailScreen(),
+                  VersesScreen.routeName: (context) => VersesScreen(),
+                },
+              );
+            },
+          );
         },
       ),
     );
