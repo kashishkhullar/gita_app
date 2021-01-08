@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:gita_app/config/global_strings.config.dart';
+import 'package:gita_app/config/sizing.config.dart';
 import 'package:gita_app/models/Chapter.dart';
 import 'package:gita_app/models/GitaData.dart';
 import 'package:gita_app/screens/chapter_detail.screen.dart';
-import 'package:gita_app/screens/verses.screen.dart';
 import 'package:provider/provider.dart';
 
 class ChaptersScreen extends StatelessWidget {
@@ -10,129 +12,126 @@ class ChaptersScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("CHAPTERS BUILD");
-
     final gitaData = Provider.of<GitaData>(context);
     final List<Chapter> chapterList =
         gitaData == null ? [] : gitaData.getChapters();
 
+    final loader = SpinKitChasingDots(color: Theme.of(context).primaryColor);
+
     return Scaffold(
       backgroundColor: Colors.white,
-      // extendBodyBehindAppBar: true,
-      // appBar: AppBar(
-      //   backgroundColor: Colors.transparent,
-      //   elevation: 0.0,
-      //   iconTheme: IconThemeData(color: Colors.amber[600]),
-      // ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              margin: EdgeInsets.only(top: 100, bottom: 50),
-              width: double.infinity,
-              child: Text(
-                "अध्यायों की सूची",
-                style: TextStyle(fontSize: 50, color: Colors.amber[600]),
-                textAlign: TextAlign.center,
+      body: chapterList.isEmpty
+          ? loader
+          : SingleChildScrollView(
+              physics: BouncingScrollPhysics(),
+              child: Column(
+                children: <Widget>[
+                  buildTitle(context),
+                  buildChapterList(chapterList),
+                ],
               ),
             ),
-            ListView.builder(
-              shrinkWrap: true,
-              primary: false,
-              itemCount: chapterList.length,
-              itemBuilder: (context, index) => Container(
-                decoration: new BoxDecoration(
-                  boxShadow: [
-                    new BoxShadow(
-                      color: Colors.grey[300],
-                      blurRadius: 20,
-                      spreadRadius: -10,
-                      offset: Offset(0, 20),
-                    )
-                  ],
-                ),
-                // width: 300,
-                // height: 300,
-                margin: EdgeInsets.only(left: 30, right: 30, bottom: 40),
-                child: Card(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  elevation: 4,
-                  margin: EdgeInsets.all(10),
-                  child: InkWell(
-                    splashColor: Colors.amber,
-                    onTap: () => Navigator.of(context).pushNamed(
-                        ChapterDetailScreen.routeName,
-                        arguments: index + 1),
-                    child: Column(
-                      children: [
-                        Container(
-                          height: 150,
-                          width: double.infinity,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(30),
-                              topRight: Radius.circular(30),
-                            ),
-                            child: Hero(
-                              tag: index + 1,
-                              child: Image.asset(
-                                "assets/images/chapters/${index + 1}.jpg",
-                                // height: 150,
-                                fit: BoxFit.fitWidth,
-                                // width: 100,
-                              ),
-                            ),
-                          ),
-                        ),
-                        Container(
-                          height: 150,
-                          padding: EdgeInsets.all(20),
-                          child: Column(
-                            children: [
-                              Text(
-                                "अध्याय ${chapterList[index].chapter_number}",
-                                style: TextStyle(
-                                  fontSize: 40,
-                                  color: Colors.amber[600],
-                                  fontWeight: FontWeight.w700,
-                                ),
-                              ),
-                              Text(
-                                chapterList[index].name,
-                                style: TextStyle(
-                                  fontSize: 35,
-                                  color: Colors.amber[600],
-                                  fontWeight: FontWeight.w100,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              // ClipRRect(
-              //
-              // child:
-              // FittedBox(
-              //   child:
-              //   // fit: BoxFit.fitWidth,
-              // ),
-              // ),
+    );
+  }
 
-              // padding: EdgeInsets.all(20),
-              // margin: EdgeInsets.all(30),
-              // decoration: BoxDecoration(
-              //     borderRadius: BorderRadius.circular(50),
-              //     boxShadow: [BoxShadow()],
-              //     color: Colors.white),
+  ListView buildChapterList(List<Chapter> chapterList) {
+    return ListView.builder(
+      shrinkWrap: true,
+      primary: false,
+      itemCount: chapterList.length,
+      itemBuilder: (context, index) => Container(
+        margin: EdgeInsets.all(4 * SizeConfig.heightMultiplier),
+        decoration: new BoxDecoration(
+          boxShadow: [
+            new BoxShadow(
+              color: Theme.of(context).shadowColor,
+              blurRadius: 20,
+              spreadRadius: -10,
+              offset: Offset(0, 20),
             )
           ],
         ),
+        child: buildChapterCard(context, index, chapterList),
+      ),
+    );
+  }
+
+  Card buildChapterCard(
+      BuildContext context, int index, List<Chapter> chapterList) {
+    return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(30),
+      ),
+      elevation: 4,
+      color: Theme.of(context).cardColor,
+      margin: EdgeInsets.all(SizeConfig.heightMultiplier),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(30),
+        splashColor: Theme.of(context).primaryColorLight,
+        focusColor: Theme.of(context).focusColor,
+        onTap: () => Navigator.of(context)
+            .pushNamed(ChapterDetailScreen.routeName, arguments: index + 1),
+        child: Column(
+          children: [
+            buildChapterCardTop(index),
+            buildChapterCardBottom(chapterList, index, context),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Container buildChapterCardBottom(
+      List<Chapter> chapterList, int index, BuildContext context) {
+    return Container(
+      height: SizeConfig.isPotrait()
+          ? 22 * SizeConfig.heightMultiplier
+          : 25 * SizeConfig.heightMultiplier,
+      padding: EdgeInsets.all(2 * SizeConfig.heightMultiplier),
+      child: Column(
+        children: [
+          Text(
+            "${GlobalStrings.chapter} ${chapterList[index].chapter_number}",
+            style: Theme.of(context).textTheme.headline3,
+          ),
+          Text(
+            chapterList[index].name,
+            style: Theme.of(context).textTheme.headline4,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Container buildChapterCardTop(int index) {
+    return Container(
+      height: SizeConfig.isPotrait()
+          ? 22 * SizeConfig.heightMultiplier
+          : 25 * SizeConfig.heightMultiplier,
+      width: double.infinity,
+      child: ClipRRect(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(30),
+          topRight: Radius.circular(30),
+        ),
+        child: Hero(
+          tag: index + 1,
+          child: Image.asset(
+            "assets/images/chapters/${index + 1}.jpg",
+            fit: BoxFit.fitWidth,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Container buildTitle(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(top: 14 * SizeConfig.heightMultiplier),
+      child: Text(
+        GlobalStrings.chapterList,
+        style: Theme.of(context).textTheme.headline2,
+        textAlign: TextAlign.center,
       ),
     );
   }

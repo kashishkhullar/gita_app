@@ -1,73 +1,71 @@
 import 'package:flutter/material.dart';
+import 'package:gita_app/config/sizing.config.dart';
 import 'package:gita_app/helpers/home.clipper.dart';
+import 'package:gita_app/config/global_strings.config.dart';
 import 'package:gita_app/screens/chapters.screen.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      drawer: Drawer(),
-      // extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        backgroundColor: Colors.amber[600],
-        elevation: 0.0,
-        iconTheme: IconThemeData(color: Colors.white),
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      body: Column(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          buildClippedTitle(context),
+          buildAboutBody(context),
+          buildListButton(context),
+          SizedBox()
+        ],
       ),
-      // resizeToAvoidBottomPadding: true,
-      body: SingleChildScrollView(
-        // color: Colors.red,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          // mainAxisSize: MainAxisSize.min,
-          children: [
-            ClipPath(
-              clipper: HomeClipper(),
-              child: Container(
-                width: double.infinity,
-                height: 300,
-                padding: EdgeInsets.only(bottom: 40),
-                decoration: BoxDecoration(
-                  color: Colors.amber[600],
-                ),
-                child: Center(
-                  child: Text(
-                    "श्रीमद्भगवद्गीता",
-                    style: TextStyle(color: Colors.white, fontSize: 50),
-                  ),
-                ),
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: 25),
-              width: double.infinity,
-              child: Text(
-                "महाभारत के अनुसार कुरुक्षेत्र युद्ध में भगवान श्री कृष्ण ने गीता का सन्देश अर्जुन को सुनाया था।\nयह महाभारत के भीष्मपर्व के अन्तर्गत दिया गया एक उपनिषद् है।\nभगवत गीता में एकेश्वरवाद, कर्म योग, ज्ञानयोग, भक्ति योग की बहुत सुन्दर ढंग से चर्चा हुई है।",
-                style: TextStyle(
-                  fontSize: 30,
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 20),
-            ),
-            RaisedButton(
-              onPressed: () {
-                Navigator.of(context).pushNamed(ChaptersScreen.routeName);
-              },
-              color: Colors.amber[600],
-              child: Container(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  "अध्यायों की सूची",
-                  style: TextStyle(color: Colors.white, fontSize: 25),
-                ),
-              ),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(90)),
-            ),
-          ],
+    );
+  }
+
+  RaisedButton buildListButton(BuildContext context) {
+    return RaisedButton(
+      onPressed: () {
+        Navigator.of(context).pushNamed(ChaptersScreen.routeName);
+      },
+      color: Theme.of(context).buttonColor,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(90)),
+      child: Container(
+        padding: EdgeInsets.all(SizeConfig.heightMultiplier),
+        child: Text(
+          GlobalStrings.chapterList,
+          style: Theme.of(context).textTheme.button,
+        ),
+      ),
+    );
+  }
+
+  Container buildAboutBody(BuildContext context) {
+    return Container(
+      margin:
+          EdgeInsets.symmetric(horizontal: 2.5 * SizeConfig.heightMultiplier),
+      child: Text(
+        GlobalStrings.aboutGita,
+        style: Theme.of(context).textTheme.bodyText1,
+        textAlign: TextAlign.center,
+      ),
+    );
+  }
+
+  ClipPath buildClippedTitle(BuildContext context) {
+    return ClipPath(
+      clipper: TopClipper(),
+      child: Container(
+        height: 35 * SizeConfig.heightMultiplier,
+        padding: EdgeInsets.only(bottom: 6 * SizeConfig.heightMultiplier),
+        decoration: BoxDecoration(
+          color: Theme.of(context).primaryColor,
+        ),
+        child: Center(
+          child: Text(
+            GlobalStrings.srimadBhagwatGita,
+            style: Theme.of(context).textTheme.headline1,
+          ),
         ),
       ),
     );
