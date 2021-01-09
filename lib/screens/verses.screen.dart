@@ -60,6 +60,7 @@ class _VersesScreenState extends State<VersesScreen> {
                     ? 70 * SizeConfig.heightMultiplier
                     : 60 * SizeConfig.heightMultiplier, // card height
                 child: PageView.builder(
+                  // pageSnapping: false,
                   physics: BouncingScrollPhysics(),
                   itemCount: verseList.length,
                   controller: PageController(viewportFraction: 0.75),

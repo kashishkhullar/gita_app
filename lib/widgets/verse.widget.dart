@@ -48,7 +48,7 @@ class VerseCard extends StatelessWidget {
                 fit: BoxFit.cover,
                 child: Text(
                   verse.text,
-                  style: TextStyle(fontSize: 6 * SizeConfig.textMultiplier),
+                  // style: TextStyle(fontSize: 6 * SizeConfig.textMultiplier),
                   textAlign: TextAlign.center,
                 ),
               ),

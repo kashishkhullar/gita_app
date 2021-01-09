@@ -32,7 +32,7 @@ class AppTheme {
 
   static final TextStyle _headlineLight1 = TextStyle(
     color: Colors.white,
-    fontSize: 7.5 * SizeConfig.textMultiplier,
+    fontSize: 7 * SizeConfig.textMultiplier,
     fontFamily: "Poppins",
     fontWeight: FontWeight.w300,
   );
@@ -46,15 +46,14 @@ class AppTheme {
 
   static final TextStyle _headlineLight3 = TextStyle(
     color: Colors.amber[600],
-    fontSize: 6 * SizeConfig.textMultiplier,
+    fontSize: 5.5 * SizeConfig.textMultiplier,
     fontFamily: "Mukta",
     fontWeight: FontWeight.bold,
   );
 
   static final TextStyle _headlineLight4 = TextStyle(
     color: Colors.black,
-    fontSize: 5 * SizeConfig.textMultiplier,
-    // fontFamily: "Mukta",
+    fontSize: 4 * SizeConfig.textMultiplier,
     fontWeight: FontWeight.normal,
   );
 
@@ -74,13 +73,13 @@ class AppTheme {
 
   static final TextStyle _bodyTextLight1 = TextStyle(
     color: Colors.black,
-    fontSize: 3 * SizeConfig.textMultiplier,
+    fontSize: 2.5 * SizeConfig.textMultiplier,
     fontFamily: "Mukta",
   );
 
   static final TextStyle _bodyTextLight2 = TextStyle(
     color: Colors.black,
-    fontSize: 2.5 * SizeConfig.textMultiplier,
+    fontSize: 2.2 * SizeConfig.textMultiplier,
   );
 
   static final TextStyle _buttonLight = TextStyle(

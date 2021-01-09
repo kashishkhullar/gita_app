@@ -42,8 +42,7 @@ class HomeScreen extends StatelessWidget {
 
   Container buildAboutBody(BuildContext context) {
     return Container(
-      margin:
-          EdgeInsets.symmetric(horizontal: 2.5 * SizeConfig.heightMultiplier),
+      margin: EdgeInsets.symmetric(horizontal: 2.5 * SizeConfig.textMultiplier),
       child: Text(
         GlobalStrings.aboutGita,
         style: Theme.of(context).textTheme.bodyText1,
@@ -56,8 +55,10 @@ class HomeScreen extends StatelessWidget {
     return ClipPath(
       clipper: TopClipper(),
       child: Container(
-        height: 35 * SizeConfig.heightMultiplier,
-        padding: EdgeInsets.only(bottom: 6 * SizeConfig.heightMultiplier),
+        height: SizeConfig.isPotrait()
+            ? 35 * SizeConfig.heightMultiplier
+            : 30 * SizeConfig.heightMultiplier,
+        padding: EdgeInsets.only(bottom: 4 * SizeConfig.heightMultiplier),
         decoration: BoxDecoration(
           color: Theme.of(context).primaryColor,
         ),

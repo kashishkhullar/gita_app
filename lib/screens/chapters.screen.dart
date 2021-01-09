@@ -93,10 +93,12 @@ class ChaptersScreen extends StatelessWidget {
           Text(
             "${GlobalStrings.chapter} ${chapterList[index].chapter_number}",
             style: Theme.of(context).textTheme.headline3,
+            textAlign: TextAlign.center,
           ),
           Text(
             chapterList[index].name,
             style: Theme.of(context).textTheme.headline4,
+            textAlign: TextAlign.center,
           ),
         ],
       ),
