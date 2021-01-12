@@ -13,13 +13,12 @@ class ChaptersScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final gitaData = Provider.of<GitaData>(context);
-    final List<Chapter> chapterList =
-        gitaData == null ? [] : gitaData.getChapters();
+    final List<Chapter> chapterList = gitaData == null ? [] : gitaData.getChapters();
 
-    final loader = SpinKitChasingDots(color: Theme.of(context).primaryColor);
+    final loader = SpinKitChasingDots(color: Theme.of(context).accentColor);
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: chapterList.isEmpty
           ? loader
           : SingleChildScrollView(
@@ -56,8 +55,7 @@ class ChaptersScreen extends StatelessWidget {
     );
   }
 
-  Card buildChapterCard(
-      BuildContext context, int index, List<Chapter> chapterList) {
+  Card buildChapterCard(BuildContext context, int index, List<Chapter> chapterList) {
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(30),
@@ -67,10 +65,9 @@ class ChaptersScreen extends StatelessWidget {
       margin: EdgeInsets.all(SizeConfig.heightMultiplier),
       child: InkWell(
         borderRadius: BorderRadius.circular(30),
-        splashColor: Theme.of(context).primaryColorLight,
+        splashColor: Theme.of(context).primaryColorDark,
         focusColor: Theme.of(context).focusColor,
-        onTap: () => Navigator.of(context)
-            .pushNamed(ChapterDetailScreen.routeName, arguments: index + 1),
+        onTap: () => Navigator.of(context).pushNamed(ChapterDetailScreen.routeName, arguments: index + 1),
         child: Column(
           children: [
             buildChapterCardTop(index),
@@ -81,12 +78,9 @@ class ChaptersScreen extends StatelessWidget {
     );
   }
 
-  Container buildChapterCardBottom(
-      List<Chapter> chapterList, int index, BuildContext context) {
+  Container buildChapterCardBottom(List<Chapter> chapterList, int index, BuildContext context) {
     return Container(
-      height: SizeConfig.isPotrait()
-          ? 22 * SizeConfig.heightMultiplier
-          : 25 * SizeConfig.heightMultiplier,
+      height: SizeConfig.isPotrait() ? 22 * SizeConfig.heightMultiplier : 25 * SizeConfig.heightMultiplier,
       padding: EdgeInsets.all(2 * SizeConfig.heightMultiplier),
       child: Column(
         children: [
@@ -107,9 +101,7 @@ class ChaptersScreen extends StatelessWidget {
 
   Container buildChapterCardTop(int index) {
     return Container(
-      height: SizeConfig.isPotrait()
-          ? 22 * SizeConfig.heightMultiplier
-          : 25 * SizeConfig.heightMultiplier,
+      height: SizeConfig.isPotrait() ? 22 * SizeConfig.heightMultiplier : 25 * SizeConfig.heightMultiplier,
       width: double.infinity,
       child: ClipRRect(
         borderRadius: BorderRadius.only(

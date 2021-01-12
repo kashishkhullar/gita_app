@@ -2,20 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:gita_app/config/sizing.config.dart';
 
 class AppTheme {
-  static const Color appBackgroundColor = Colors.white;
+  // Light Theme
 
   static final ThemeData lightTheme = ThemeData(
-    scaffoldBackgroundColor: appBackgroundColor,
+    scaffoldBackgroundColor: appBackgroundColorLight,
     brightness: Brightness.light,
     primarySwatch: Colors.amber,
-    textTheme: lightTextTheme,
+    textTheme: _lightTextTheme,
     shadowColor: Colors.grey[500],
     cardColor: Colors.white,
     buttonColor: Colors.amber[900],
     focusColor: Colors.white,
+    iconTheme: _iconThemeDataLight,
+    dividerColor: Colors.black,
   );
 
-  static final TextTheme lightTextTheme = TextTheme(
+  static const Color appBackgroundColorLight = Colors.white;
+
+  static final TextTheme _lightTextTheme = TextTheme(
     headline1: _headlineLight1,
     headline2: _headlineLight2,
     headline3: _headlineLight3,
@@ -28,11 +32,9 @@ class AppTheme {
     button: _buttonLight,
   );
 
-  // TODO: create for dark theme
-
   static final TextStyle _headlineLight1 = TextStyle(
     color: Colors.white,
-    fontSize: 7 * SizeConfig.textMultiplier,
+    fontSize: 6.5 * SizeConfig.textMultiplier,
     fontFamily: "Poppins",
     fontWeight: FontWeight.w300,
   );
@@ -93,6 +95,58 @@ class AppTheme {
     fontWeight: FontWeight.bold,
   );
 
-  static final TextStyle _headlineDark1 =
-      _headlineDark1.copyWith(color: Colors.amber);
+  static final IconThemeData _iconThemeDataLight = IconThemeData(color: Colors.white);
+
+  // Dark Theme
+
+  static final ThemeData darkTheme = ThemeData(
+    scaffoldBackgroundColor: appBackgroundColorDark,
+    brightness: Brightness.dark,
+    primarySwatch: Colors.amber,
+    primaryColor: Color.fromRGBO(18, 18, 18, 1),
+    primaryColorLight: Colors.white,
+    primaryColorDark: Colors.white,
+    accentColor: Colors.amber[300],
+    textTheme: _darkTextTheme,
+    cardColor: Color.fromRGBO(18, 18, 18, 1),
+    buttonColor: Colors.orange[900],
+    focusColor: Colors.white,
+    iconTheme: _iconThemeDataDark,
+    dividerColor: Colors.white,
+  );
+
+  static final Color appBackgroundColorDark = Colors.black;
+
+  static final TextTheme _darkTextTheme = TextTheme(
+    headline1: _headlineDark1,
+    headline2: _headlineDark2,
+    headline3: _headlineDark3,
+    headline4: _headlineDark4,
+    headline5: _headlineDark5,
+    headline6: _headlineDark6,
+    bodyText1: _bodyTextDark1,
+    bodyText2: _bodyTextDark2,
+    overline: _overlineLight,
+    button: _buttonDark,
+  );
+
+  static final IconThemeData _iconThemeDataDark = IconThemeData(color: Colors.amber[800]);
+
+  static final TextStyle _headlineDark1 = _headlineLight1.copyWith(color: Colors.amber[900]);
+
+  static final TextStyle _headlineDark2 = _headlineLight2;
+
+  static final TextStyle _headlineDark3 = _headlineLight3.copyWith(color: Colors.amber[700]);
+
+  static final TextStyle _headlineDark4 = _headlineLight4.copyWith(color: Colors.white);
+
+  static final TextStyle _headlineDark5 = _headlineLight5;
+
+  static final TextStyle _headlineDark6 = _headlineLight6;
+
+  static final TextStyle _bodyTextDark1 = _bodyTextLight1.copyWith(color: Colors.white);
+
+  static final TextStyle _bodyTextDark2 = _bodyTextLight2.copyWith(color: Colors.white);
+
+  static final TextStyle _buttonDark = _buttonLight.copyWith(color: Colors.white);
 }

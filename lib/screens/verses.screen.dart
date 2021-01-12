@@ -3,6 +3,7 @@ import 'package:gita_app/config/sizing.config.dart';
 import 'package:gita_app/helpers/home.clipper.dart';
 import 'package:gita_app/models/GitaData.dart';
 import 'package:gita_app/models/Verse.dart';
+import 'package:gita_app/providers/progress.provider.dart';
 import 'package:gita_app/widgets/verse.widget.dart';
 import 'package:gita_app/widgets/verse_panel.widget.dart';
 import 'package:provider/provider.dart';
@@ -39,6 +40,9 @@ class _VersesScreenState extends State<VersesScreen> {
     final gitaData = Provider.of<GitaData>(context, listen: false);
     final List<Verse> verseList = gitaData.getVerses(currentChapterNumber);
 
+    final ProgressProvider progress = Provider.of<ProgressProvider>(context, listen: false);
+    print("get ${progress.getProgress(currentChapterNumber)}");
+
     return WillPopScope(
       onWillPop: () async {
         if (_pc.isPanelClosed)
@@ -56,16 +60,17 @@ class _VersesScreenState extends State<VersesScreen> {
             Align(
               alignment: Alignment.bottomCenter,
               child: SizedBox(
-                height: SizeConfig.isPotrait()
-                    ? 70 * SizeConfig.heightMultiplier
-                    : 60 * SizeConfig.heightMultiplier, // card height
+                height: SizeConfig.isPotrait() ? 70 * SizeConfig.heightMultiplier : 60 * SizeConfig.heightMultiplier,
                 child: PageView.builder(
-                  // pageSnapping: false,
                   physics: BouncingScrollPhysics(),
                   itemCount: verseList.length,
-                  controller: PageController(viewportFraction: 0.75),
+                  controller: PageController(
+                    viewportFraction: 0.75,
+                    initialPage: progress.getProgress(currentChapterNumber),
+                  ),
                   onPageChanged: (int changedPageNumber) {
                     setState(() => _pageNumber = changedPageNumber);
+                    progress.setProgress(currentChapterNumber, changedPageNumber);
                   },
                   itemBuilder: (_, index) {
                     return Transform.scale(

@@ -31,7 +31,10 @@ class _VerseBottomPanelState extends State<VerseBottomPanel> {
     return SlidingUpPanel(
       collapsed: Column(
         children: [
-          Icon(Icons.drag_handle),
+          Icon(
+            Icons.drag_handle,
+            color: Theme.of(context).dividerColor,
+          ),
           Text(
             GlobalStrings.panelText,
             style: Theme.of(context).textTheme.overline,
@@ -44,38 +47,31 @@ class _VerseBottomPanelState extends State<VerseBottomPanel> {
       panelSnapping: true,
       backdropEnabled: true,
       backdropColor: Theme.of(context).primaryColor,
+      color: Theme.of(context).cardColor,
       minHeight: 6 * SizeConfig.heightMultiplier,
-      maxHeight: SizeConfig.isPotrait()
-          ? 70 * SizeConfig.heightMultiplier
-          : 50 * SizeConfig.heightMultiplier,
+      maxHeight: SizeConfig.isPotrait() ? 70 * SizeConfig.heightMultiplier : 50 * SizeConfig.heightMultiplier,
       panelBuilder: (sc) {
         _sc = sc;
         return buildPanelContent(context, sc);
       },
-      borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(50), topRight: Radius.circular(50)),
+      borderRadius: BorderRadius.only(topLeft: Radius.circular(50), topRight: Radius.circular(50)),
     );
   }
 
-  SingleChildScrollView buildPanelContent(
-      BuildContext context, ScrollController sc) {
+  SingleChildScrollView buildPanelContent(BuildContext context, ScrollController sc) {
     return SingleChildScrollView(
       physics: BouncingScrollPhysics(),
       controller: sc,
       // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       child: Container(
         // color: Colors.red,
-        margin:
-            EdgeInsets.symmetric(horizontal: 3.5 * SizeConfig.heightMultiplier),
+        margin: EdgeInsets.symmetric(horizontal: 3.5 * SizeConfig.heightMultiplier),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
-            Padding(
-                padding: EdgeInsets.symmetric(
-                    vertical: 3 * SizeConfig.heightMultiplier)),
+            Padding(padding: EdgeInsets.symmetric(vertical: 3 * SizeConfig.heightMultiplier)),
             Container(
-              padding: EdgeInsets.symmetric(
-                  horizontal: 1 * SizeConfig.heightMultiplier),
+              padding: EdgeInsets.symmetric(horizontal: 1 * SizeConfig.heightMultiplier),
               child: Column(
                 children: [
                   Text(
@@ -88,15 +84,12 @@ class _VerseBottomPanelState extends State<VerseBottomPanel> {
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.bodyText1,
                   ),
-                  Padding(
-                      padding: EdgeInsets.symmetric(
-                          vertical: 3 * SizeConfig.heightMultiplier))
+                  Padding(padding: EdgeInsets.symmetric(vertical: 3 * SizeConfig.heightMultiplier))
                 ],
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(
-                  horizontal: 1 * SizeConfig.heightMultiplier),
+              padding: EdgeInsets.symmetric(horizontal: 1 * SizeConfig.heightMultiplier),
               child: Column(
                 children: [
                   Text(
@@ -109,15 +102,12 @@ class _VerseBottomPanelState extends State<VerseBottomPanel> {
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.bodyText1,
                   ),
-                  Padding(
-                      padding: EdgeInsets.symmetric(
-                          vertical: 3 * SizeConfig.heightMultiplier))
+                  Padding(padding: EdgeInsets.symmetric(vertical: 3 * SizeConfig.heightMultiplier))
                 ],
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(
-                  horizontal: 1 * SizeConfig.heightMultiplier),
+              padding: EdgeInsets.symmetric(horizontal: 1 * SizeConfig.heightMultiplier),
               child: Column(
                 children: [
                   Text(
