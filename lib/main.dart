@@ -31,19 +31,19 @@ class MyApp extends StatelessWidget {
             builder: (context, orientation) {
               SizeConfig().init(constraints, orientation);
               final bool themeIsDark = Provider.of<ThemeProvider>(context).isDark;
-              return MaterialApp(
-                debugShowCheckedModeBanner: false,
-                title: 'Gita',
-                theme: themeIsDark ? AppTheme.darkTheme : AppTheme.lightTheme,
-                home: Provider<ProgressProvider>(
-                  create: (_) => ProgressProvider(),
-                  child: HomeScreen(),
+              return Consumer<GitaData>(
+                builder: (context, value, child) => MaterialApp(
+                  debugShowCheckedModeBanner: false,
+                  title: 'Gita',
+                  theme: themeIsDark ? AppTheme.darkTheme : AppTheme.lightTheme,
+                  home: HomeScreen(),
+                  routes: {
+                    HomeScreen.routeName: (context) => HomeScreen(),
+                    ChaptersScreen.routeName: (context) => ChaptersScreen(),
+                    ChapterDetailScreen.routeName: (context) => ChapterDetailScreen(),
+                    VersesScreen.routeName: (context) => VersesScreen(),
+                  },
                 ),
-                routes: {
-                  ChaptersScreen.routeName: (context) => ChaptersScreen(),
-                  ChapterDetailScreen.routeName: (context) => ChapterDetailScreen(),
-                  VersesScreen.routeName: (context) => VersesScreen(),
-                },
               );
             },
           );
