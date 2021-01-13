@@ -115,7 +115,7 @@ class AppTheme {
     dividerColor: Colors.white,
   );
 
-  static final Color appBackgroundColorDark = Colors.black;
+  static final Color appBackgroundColorDark = Colors.grey[900];
 
   static final TextTheme _darkTextTheme = TextTheme(
     headline1: _headlineDark1,
