@@ -1,10 +1,11 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:gita_app/models/Chapter.dart';
 import 'package:gita_app/models/Verse.dart';
 
 class GitaData {
-  final Map<String, dynamic> gitaData;
+  Map<String, dynamic> gitaData;
 
   GitaData(this.gitaData);
 
@@ -30,7 +31,7 @@ class GitaData {
 
     for (var i = 1; i <= 18; i++) {
       var chapter = Chapter(
-        chapter_number: chapterData["$i"]["chapter_number"],
+        chapter_number: chapterData["$i"]["chapter_number"].toString(),
         chapter_summary: chapterData["$i"]["chapter_summary"],
         name: chapterData["$i"]["name"],
         name_meaning: chapterData["$i"]["name_meaning"],
@@ -45,8 +46,7 @@ class GitaData {
   List<Verse> getVerses(int chapterNumber) {
     var verseList = List<Verse>();
 
-    List<dynamic> verseNumbers =
-        gitaData["chapters"]["$chapterNumber"]["verse_numbers"];
+    List<dynamic> verseNumbers = gitaData["chapters"]["$chapterNumber"]["verse_numbers"];
 
     Map<String, dynamic> verseData = gitaData["verses"]["$chapterNumber"];
 
@@ -64,5 +64,22 @@ class GitaData {
 
   int countVersesInChapter(int chapterNumber) {
     return gitaData["chapters"]["$chapterNumber"]["verse_numbers"].length;
+  }
+
+  void reloadData(BuildContext context) async {
+    var dataString = await DefaultAssetBundle.of(context).loadString("assets/data/dataset_english.json");
+    gitaData = jsonDecode(dataString);
+  }
+
+  String getChapterNumberInHindi(int chapterNumber) {
+    return gitaData["chapters"]["$chapterNumber"]["chapter_number"];
+  }
+
+  List<String> getChapterVerseNumbers(String chapterNumber) {
+    return gitaData["chapters"]["$chapterNumber"]["verse_numbers"].map<String>((i) => i.toString()).toList();
+  }
+
+  String getVerseNumberInHindi(String chapterNumber, String verseNumber) {
+    return gitaData["verses"]["$chapterNumber"]["$verseNumber"]["verse_number"];
   }
 }
