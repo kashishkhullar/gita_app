@@ -1,11 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:gita_app/config/global_strings.config.dart';
-import 'package:gita_app/config/sizing.config.dart';
-import 'package:gita_app/helpers/number_converter.helper.dart';
 import 'package:gita_app/models/GitaData.dart';
 import 'package:gita_app/providers/progress.provider.dart';
-import 'package:gita_app/screens/home.screen.dart';
 import 'package:gita_app/screens/verses.screen.dart';
 import 'package:provider/provider.dart';
 
