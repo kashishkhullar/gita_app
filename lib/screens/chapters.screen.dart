@@ -7,6 +7,8 @@ import 'package:gita_app/models/GitaData.dart';
 import 'package:gita_app/screens/chapter_detail.screen.dart';
 import 'package:provider/provider.dart';
 
+// change text size based on language
+
 class ChaptersScreen extends StatelessWidget {
   static final String routeName = "/chapters";
 
