@@ -15,6 +15,7 @@ class AppTheme {
     focusColor: Colors.white,
     iconTheme: _iconThemeDataLight,
     dividerColor: Colors.black,
+    selectedRowColor: Colors.grey[500],
   );
 
   static const Color appBackgroundColorLight = Colors.white;
@@ -113,6 +114,7 @@ class AppTheme {
     focusColor: Colors.white,
     iconTheme: _iconThemeDataDark,
     dividerColor: Colors.white,
+    selectedRowColor: Colors.grey[500],
   );
 
   static final Color appBackgroundColorDark = Colors.grey[900];
