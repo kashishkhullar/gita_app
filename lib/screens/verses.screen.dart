@@ -37,11 +37,14 @@ class _VersesScreenState extends State<VersesScreen> {
   @override
   Widget build(BuildContext context) {
     int currentChapterNumber = ModalRoute.of(context).settings.arguments;
+
     final gitaData = Provider.of<GitaData>(context, listen: false);
     final List<Verse> verseList = gitaData.getVerses(currentChapterNumber);
 
     final ProgressProvider progress = Provider.of<ProgressProvider>(context, listen: false);
     print("get ${progress.getProgress(currentChapterNumber)}");
+
+    _pageNumber = progress.getProgress(currentChapterNumber);
 
     return WillPopScope(
       onWillPop: () async {
