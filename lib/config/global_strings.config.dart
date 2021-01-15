@@ -21,4 +21,18 @@ class GlobalStrings {
   static const String meaning = "शब्दार्थ";
 
   static const String translation = "अनुवाद";
+
+  static const String home = "होम";
+
+  static const String goToVerse = "विशिष्ट श्लोक पढ़ें";
+
+  static const String theme = "थीम चुनें";
+
+  static const String language = "भाषा चुनें";
+
+  static const String moreAboutGita = "गीता की अधिक जानकारी";
+
+  static const String aboutDeveloper = "डेवलपर की जानकारी";
+
+  static const String appInfo = "एप्लिकेशन की जानकारी";
 }

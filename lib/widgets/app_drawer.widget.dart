@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:gita_app/config/global_strings.config.dart';
 import 'package:gita_app/config/sizing.config.dart';
 import 'package:gita_app/screens/chapters.screen.dart';
 import 'package:gita_app/widgets/drawer_tile.widget.dart';
@@ -22,28 +23,28 @@ class AppDrawer extends StatelessWidget {
             buildDrawerImage(),
             buildDrawerTitle(context),
             DrawerTile(
-              title: "Home",
+              title: GlobalStrings.home,
               onTap: () {
                 Navigator.of(context).pop();
               },
               icon: Icons.home,
             ),
             DrawerTile(
-              title: "List of Chapters",
+              title: GlobalStrings.chapterList,
               onTap: () {
                 Navigator.of(context).popAndPushNamed(ChaptersScreen.routeName);
               },
               icon: Icons.list,
             ),
             DrawerTile(
-              title: "Go to Verse",
+              title: GlobalStrings.goToVerse,
               onTap: () {
                 showDialog(context: context, child: SelectVerseDialog());
               },
               icon: Icons.forward,
             ),
             DrawerTile(
-              title: "Theme",
+              title: GlobalStrings.theme,
               onTap: () {
                 showDialog<void>(
                     //<div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
@@ -53,15 +54,15 @@ class AppDrawer extends StatelessWidget {
               icon: Icons.color_lens,
             ),
             DrawerTile(
-              title: "Language",
+              title: GlobalStrings.language,
               onTap: () {
                 // Provider.of<GitaData>(context, listen: false).reloadData(context);
               },
               icon: Icons.language,
             ),
-            DrawerTile(title: "About Gita", onTap: () {}, icon: Icons.library_books),
-            DrawerTile(title: "About Developer", onTap: () {}, icon: Icons.developer_board),
-            DrawerTile(title: "App Info", onTap: () {}, icon: Icons.info),
+            DrawerTile(title: GlobalStrings.moreAboutGita, onTap: () {}, icon: Icons.library_books),
+            DrawerTile(title: GlobalStrings.aboutDeveloper, onTap: () {}, icon: Icons.developer_board),
+            DrawerTile(title: GlobalStrings.appInfo, onTap: () {}, icon: Icons.info),
           ],
         ),
       ),
