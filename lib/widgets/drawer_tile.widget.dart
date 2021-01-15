@@ -6,10 +6,13 @@ class DrawerTile extends StatelessWidget {
     Key key,
     @required this.title,
     @required this.onTap,
+    @required this.icon,
   }) : super(key: key);
   final String title;
 
   final Function() onTap;
+
+  final IconData icon;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +20,7 @@ class DrawerTile extends StatelessWidget {
       title: Row(
         children: [
           Icon(
-            Icons.home,
+            icon,
             color: Theme.of(context).buttonColor,
           ),
           Container(

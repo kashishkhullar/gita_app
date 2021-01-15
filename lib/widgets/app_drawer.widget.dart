@@ -31,18 +31,21 @@ class AppDrawer extends StatelessWidget {
               onTap: () {
                 Navigator.of(context).pop();
               },
+              icon: Icons.home,
             ),
             DrawerTile(
               title: "List of Chapters",
               onTap: () {
                 Navigator.of(context).popAndPushNamed(ChaptersScreen.routeName);
               },
+              icon: Icons.list,
             ),
             DrawerTile(
               title: "Go to Verse",
               onTap: () {
                 showDialog(context: context, child: SelectVerseDialog());
               },
+              icon: Icons.forward,
             ),
             DrawerTile(
               title: "Theme",
@@ -52,15 +55,18 @@ class AppDrawer extends StatelessWidget {
                     context: context,
                     builder: (context) => SelectThemeDialog());
               },
+              icon: Icons.color_lens,
             ),
             DrawerTile(
               title: "Language",
               onTap: () {
                 // Provider.of<GitaData>(context, listen: false).reloadData(context);
               },
+              icon: Icons.language,
             ),
-            DrawerTile(title: "About Gita", onTap: () {}),
-            DrawerTile(title: "About Developer", onTap: () {}),
+            DrawerTile(title: "About Gita", onTap: () {}, icon: Icons.library_books),
+            DrawerTile(title: "About Developer", onTap: () {}, icon: Icons.developer_board),
+            DrawerTile(title: "App Info", onTap: () {}, icon: Icons.info),
           ],
         ),
       ),
