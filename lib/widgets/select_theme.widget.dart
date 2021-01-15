@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gita_app/config/global_strings.config.dart';
+import 'package:gita_app/config/sizing.config.dart';
 import 'package:gita_app/providers/theme.provider.dart';
 import 'package:provider/provider.dart';
 
@@ -11,11 +13,11 @@ class SelectThemeDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return SimpleDialog(
       title: Text(
-        "Select theme",
+        GlobalStrings.theme,
         textAlign: TextAlign.center,
         style: Theme.of(context).textTheme.headline6,
       ),
-      titlePadding: EdgeInsets.all(24),
+      titlePadding: EdgeInsets.all(4 * SizeConfig.heightMultiplier),
       children: [
         Container(
           child: Row(
@@ -38,12 +40,12 @@ class SelectThemeDialog extends StatelessWidget {
         themeProvider.setDarkTheme();
       },
       child: Container(
-        padding: EdgeInsets.all(10),
+        padding: EdgeInsets.all(SizeConfig.heightMultiplier),
         decoration: BoxDecoration(
           color: isDark ? Theme.of(context).selectedRowColor : Theme.of(context).dialogBackgroundColor,
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(15),
         ),
-        width: 120,
+        width: 15 * SizeConfig.heightMultiplier,
         child: Image.asset(
           "assets/images/moon.png",
           fit: BoxFit.cover,
@@ -60,12 +62,12 @@ class SelectThemeDialog extends StatelessWidget {
         themeProvider.setLightTheme();
       },
       child: Container(
-        padding: EdgeInsets.all(10),
+        padding: EdgeInsets.all(SizeConfig.heightMultiplier),
         decoration: BoxDecoration(
           color: isDark ? Theme.of(context).dialogBackgroundColor : Theme.of(context).selectedRowColor,
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(15),
         ),
-        width: 120,
+        width: 15 * SizeConfig.heightMultiplier,
         child: Image.asset(
           "assets/images/sun.png",
           fit: BoxFit.cover,

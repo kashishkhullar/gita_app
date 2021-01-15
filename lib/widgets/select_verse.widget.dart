@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:gita_app/config/global_strings.config.dart';
 import 'package:gita_app/models/GitaData.dart';
 import 'package:gita_app/providers/progress.provider.dart';
 import 'package:gita_app/screens/verses.screen.dart';
@@ -20,7 +21,7 @@ class _SelectVerseDialogState extends State<SelectVerseDialog> {
   Widget build(BuildContext context) {
     return SimpleDialog(
       title: Text(
-        "अध्याय की संख्या और उसके श्लोक की संख्या का चयन करें",
+        GlobalStrings.selectVerse,
         textAlign: TextAlign.center,
         style: Theme.of(context).textTheme.headline6,
       ),
