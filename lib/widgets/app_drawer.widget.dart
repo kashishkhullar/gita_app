@@ -1,14 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gita_app/config/sizing.config.dart';
-import 'package:gita_app/models/GitaData.dart';
-import 'package:gita_app/providers/theme.provider.dart';
 import 'package:gita_app/screens/chapters.screen.dart';
-import 'package:gita_app/screens/home.screen.dart';
 import 'package:gita_app/widgets/drawer_tile.widget.dart';
 import 'package:gita_app/widgets/select_theme.widget.dart';
 import 'package:gita_app/widgets/select_verse.widget.dart';
-import 'package:provider/provider.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({
@@ -21,7 +17,6 @@ class AppDrawer extends StatelessWidget {
       child: Container(
         color: Theme.of(context).cardColor,
         child: ListView(
-          // Important: Remove any padding from the ListView.
           padding: EdgeInsets.zero,
           children: <Widget>[
             buildDrawerImage(),
