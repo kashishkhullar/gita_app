@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gita_app/config/sizing.config.dart';
 import 'package:gita_app/config/styling.config.dart';
-import 'package:gita_app/models/GitaData.dart';
 import 'package:gita_app/providers/data.provider.dart';
 import 'package:gita_app/providers/progress.provider.dart';
+import 'package:gita_app/providers/storage.provider.dart';
 import 'package:gita_app/providers/theme.provider.dart';
 import 'package:gita_app/screens/chapter_detail.screen.dart';
 import 'package:gita_app/screens/chapters.screen.dart';
@@ -21,21 +21,27 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        FutureProvider(create: (context) => StorageProvider.getStorage()),
         FutureProvider(create: (context) => DataProvider().loadGitaData(context)),
-        Provider(create: (_) => ProgressProvider()),
-        ChangeNotifierProvider(create: (_) => ThemeProvider()),
+        ChangeNotifierProxyProvider<StorageProvider, ThemeProvider>(
+          create: (context) => ThemeProvider(null),
+          update: (context, storageProvider, themeProvider) => ThemeProvider(storageProvider),
+        ),
+        ChangeNotifierProxyProvider<StorageProvider, ProgressProvider>(
+          create: (context) => ProgressProvider(null),
+          update: (context, storageProvider, progressProvider) => ProgressProvider(storageProvider),
+        )
       ],
       child: LayoutBuilder(
         builder: (context, constraints) {
           return OrientationBuilder(
             builder: (context, orientation) {
               SizeConfig().init(constraints, orientation);
-              final bool themeIsDark = Provider.of<ThemeProvider>(context).isDark;
-              return Consumer<GitaData>(
-                builder: (context, value, child) => MaterialApp(
+              return Consumer2<StorageProvider, ThemeProvider>(builder: (context, storage, themeProvider, __) {
+                return MaterialApp(
                   debugShowCheckedModeBanner: false,
                   title: 'Gita',
-                  theme: themeIsDark ? AppTheme.darkTheme : AppTheme.lightTheme,
+                  theme: themeProvider.isDark ? AppTheme.darkTheme : AppTheme.lightTheme,
                   home: HomeScreen(),
                   routes: {
                     HomeScreen.routeName: (context) => HomeScreen(),
@@ -43,8 +49,8 @@ class MyApp extends StatelessWidget {
                     ChapterDetailScreen.routeName: (context) => ChapterDetailScreen(),
                     VersesScreen.routeName: (context) => VersesScreen(),
                   },
-                ),
-              );
+                );
+              });
             },
           );
         },
