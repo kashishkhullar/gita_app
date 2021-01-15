@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:gita_app/config/global_strings.config.dart';
 import 'package:gita_app/config/sizing.config.dart';
 import 'package:gita_app/screens/chapters.screen.dart';
+import 'package:gita_app/widgets/developer_info.widget.dart';
 import 'package:gita_app/widgets/drawer_tile.widget.dart';
+import 'package:gita_app/widgets/gita_info.widget.dart';
+import 'package:gita_app/widgets/select_language.widget.dart';
 import 'package:gita_app/widgets/select_theme.widget.dart';
 import 'package:gita_app/widgets/select_verse.widget.dart';
 
@@ -56,13 +59,39 @@ class AppDrawer extends StatelessWidget {
             DrawerTile(
               title: GlobalStrings.language,
               onTap: () {
+                showDialog<void>(
+                    //<div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+                    context: context,
+                    builder: (context) => SelectLanguageDialog());
                 // Provider.of<GitaData>(context, listen: false).reloadData(context);
               },
               icon: Icons.language,
             ),
-            DrawerTile(title: GlobalStrings.moreAboutGita, onTap: () {}, icon: Icons.library_books),
-            DrawerTile(title: GlobalStrings.aboutDeveloper, onTap: () {}, icon: Icons.developer_board),
-            DrawerTile(title: GlobalStrings.appInfo, onTap: () {}, icon: Icons.info),
+            DrawerTile(
+                title: GlobalStrings.moreAboutGita,
+                onTap: () {
+                  showDialog<void>(context: context, builder: (context) => GitaInfoDialog());
+                },
+                icon: Icons.library_books),
+            DrawerTile(
+                title: GlobalStrings.aboutDeveloper,
+                onTap: () {
+                  showDialog<void>(context: context, builder: (context) => DeveloperInfoDialog());
+                },
+                icon: Icons.developer_board),
+            DrawerTile(
+                title: GlobalStrings.appInfo,
+                onTap: () {
+                  showAboutDialog(
+                      context: context,
+                      applicationVersion: "1.0.0",
+                      applicationIcon: Image.asset(
+                        "assets/images/icon.png",
+                        fit: BoxFit.fill,
+                      ),
+                      applicationLegalese: "This app is Open Sourced");
+                },
+                icon: Icons.info),
           ],
         ),
       ),
