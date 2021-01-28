@@ -15,7 +15,7 @@ class SelectVerseDialog extends StatefulWidget {
 
 class _SelectVerseDialogState extends State<SelectVerseDialog> {
   String selectedChapter = "1";
-  String selectedVerse = "1";
+  String selectedVerse = "0";
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +49,7 @@ class _SelectVerseDialogState extends State<SelectVerseDialog> {
                   print(newValue);
                   setState(() {
                     selectedChapter = newValue;
-                    selectedVerse = "1";
+                    selectedVerse = "0";
                   });
                 },
                 items: buildChapterSelectorList(),
@@ -85,8 +85,8 @@ class _SelectVerseDialogState extends State<SelectVerseDialog> {
             // minWidth: 100,
             onPressed: () {
               Provider.of<ProgressProvider>(context, listen: false)
-                  .setProgress(int.parse(selectedChapter), int.parse(selectedVerse) - 1);
-              Navigator.of(context).pushReplacementNamed(VersesScreen.routeName, arguments: int.parse(selectedChapter));
+                  .setProgress(int.parse(selectedChapter), int.parse(selectedVerse));
+              Navigator.of(context).pushNamed(VersesScreen.routeName, arguments: int.parse(selectedChapter));
             },
             color: Theme.of(context).buttonColor,
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(90)),
@@ -107,31 +107,38 @@ class _SelectVerseDialogState extends State<SelectVerseDialog> {
     final GitaData gitaData = Provider.of<GitaData>(context);
 
     for (var i = 1; i <= 18; i++) {
-      dropdownList.add(DropdownMenuItem<String>(
-        value: i.toString(),
-        child: Text(
-          gitaData.getChapterNumberInHindi(i),
-          style: Theme.of(context).textTheme.headline4,
+      dropdownList.add(
+        DropdownMenuItem<String>(
+          value: i.toString(),
+          child: Text(
+            gitaData.getChapterNumberInHindi(i),
+            style: Theme.of(context).textTheme.headline4,
+          ),
         ),
-      ));
+      );
     }
     return dropdownList;
   }
 
   List<DropdownMenuItem<String>> buildVerseSelectorList(String chapterNumber) {
-    // List<DropdownMenuItem<String>> dropdownList = [];
+    List<DropdownMenuItem<String>> dropdownList = [];
 
     final GitaData gitaData = Provider.of<GitaData>(context);
 
-    return gitaData
-        .getChapterVerseNumbers(chapterNumber)
-        .map((verseNumber) => DropdownMenuItem<String>(
-              value: verseNumber,
-              child: Text(
-                gitaData.getVerseNumberInHindi(chapterNumber, verseNumber),
-                style: Theme.of(context).textTheme.headline4,
-              ),
-            ))
-        .toList();
+    final List<String> chapterVerseNumbers = gitaData.getChapterVerseNumbers(chapterNumber);
+
+    for (int i = 0; i < chapterVerseNumbers.length; i++) {
+      dropdownList.add(
+        DropdownMenuItem<String>(
+          value: i.toString(),
+          child: Text(
+            gitaData.getVerseNumberInHindi(chapterNumber, chapterVerseNumbers[i]),
+            style: Theme.of(context).textTheme.headline4,
+          ),
+        ),
+      );
+    }
+
+    return dropdownList;
   }
 }
