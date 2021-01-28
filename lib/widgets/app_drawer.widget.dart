@@ -87,7 +87,10 @@ class AppDrawer extends StatelessWidget {
                       applicationVersion: "1.0.0",
                       applicationIcon: Image.asset(
                         "assets/images/icon.png",
-                        fit: BoxFit.fill,
+                        fit: BoxFit.cover,
+                        isAntiAlias: true,
+                        width: SizeConfig.imageSizeMultiplier * 25,
+                        height: SizeConfig.imageSizeMultiplier * 25,
                       ),
                       applicationLegalese: "This app is Open Sourced");
                 },
