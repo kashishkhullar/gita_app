@@ -56,6 +56,10 @@ class GlobalStrings {
 
   static const String email = "kkhullar7@gmail.com";
 
+  static const String emailSubject = "Suggesstion/Bug about your Gita App";
+
+  static const String emailBody = "Jai Shree Krishna";
+
   static const String developerInfoLine3 = "अगर आप ऐप में योगदान देना चाहते हैं तो ऐप के GitHub रिपॉजिटरी पर जाएं।";
 
   static const String github = "https://github.com/kashishkhullar/gita_app";
