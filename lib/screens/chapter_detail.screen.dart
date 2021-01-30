@@ -4,6 +4,7 @@ import 'package:gita_app/config/sizing.config.dart';
 import 'package:gita_app/helpers/home.clipper.dart';
 import 'package:gita_app/models/Chapter.dart';
 import 'package:gita_app/models/GitaData.dart';
+import 'package:gita_app/providers/language.provider.dart';
 import 'package:gita_app/screens/verses.screen.dart';
 import 'package:provider/provider.dart';
 
@@ -22,22 +23,19 @@ class _ChapterDetailScreenState extends State<ChapterDetailScreen> {
     int currentChapterNumber = ModalRoute.of(context).settings.arguments;
 
     final GitaData gitaData = Provider.of<GitaData>(context);
-    final Chapter chapter =
-        gitaData.getChapter(currentChapterNumber.toString());
+    final Chapter chapter = gitaData.getChapter(currentChapterNumber.toString());
 
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Stack(
-        children: <Widget>[
-          buildTopImage(context, currentChapterNumber),
-          buildBottomCard(context, chapter, currentChapterNumber)
-        ],
+        children: <Widget>[buildTopImage(context, currentChapterNumber), buildBottomCard(context, chapter, currentChapterNumber)],
       ),
     );
   }
 
-  Align buildBottomCard(
-      BuildContext context, Chapter chapter, int currentChapterNumber) {
+  Align buildBottomCard(BuildContext context, Chapter chapter, int currentChapterNumber) {
+    final LanguageProvider languageProvider = Provider.of<LanguageProvider>(context);
+
     return Align(
       alignment: Alignment.bottomCenter,
       child: ConstrainedBox(
@@ -59,10 +57,7 @@ class _ChapterDetailScreenState extends State<ChapterDetailScreen> {
               ],
             ),
             child: Card(
-              margin: EdgeInsets.only(
-                  left: 2 * SizeConfig.heightMultiplier,
-                  right: 2 * SizeConfig.heightMultiplier,
-                  bottom: 2 * SizeConfig.heightMultiplier),
+              margin: EdgeInsets.only(left: 2 * SizeConfig.heightMultiplier, right: 2 * SizeConfig.heightMultiplier, bottom: 2 * SizeConfig.heightMultiplier),
               elevation: 4,
               color: Theme.of(context).cardColor,
               shape: RoundedRectangleBorder(
@@ -75,7 +70,7 @@ class _ChapterDetailScreenState extends State<ChapterDetailScreen> {
                     padding: EdgeInsets.only(top: SizeConfig.heightMultiplier),
                   ),
                   Text(
-                    "${GlobalStrings.chapter} ${chapter.chapter_number}",
+                    "${GlobalStrings.data[languageProvider.currentLanguage]["chapter"]} ${chapter.chapter_number}",
                     style: Theme.of(context).textTheme.headline4,
                     textAlign: TextAlign.center,
                   ),
@@ -99,8 +94,7 @@ class _ChapterDetailScreenState extends State<ChapterDetailScreen> {
                     padding: EdgeInsets.only(top: SizeConfig.heightMultiplier),
                   ),
                   Container(
-                    margin: EdgeInsets.symmetric(
-                        horizontal: SizeConfig.heightMultiplier),
+                    margin: EdgeInsets.symmetric(horizontal: SizeConfig.heightMultiplier),
                     child: Text(
                       chapter.chapter_summary,
                       style: Theme.of(context).textTheme.bodyText2,
@@ -112,19 +106,17 @@ class _ChapterDetailScreenState extends State<ChapterDetailScreen> {
                   ),
                   RaisedButton(
                     onPressed: () {
-                      Navigator.of(context).pushNamed(VersesScreen.routeName,
-                          arguments: currentChapterNumber);
+                      Navigator.of(context).pushNamed(VersesScreen.routeName, arguments: currentChapterNumber);
                     },
                     color: Theme.of(context).buttonColor,
                     child: Container(
                       padding: EdgeInsets.all(SizeConfig.heightMultiplier),
                       child: Text(
-                        GlobalStrings.verseList,
+                        GlobalStrings.data[languageProvider.currentLanguage]["verseList"],
                         style: Theme.of(context).textTheme.button,
                       ),
                     ),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(90)),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(90)),
                   ),
                   Padding(
                     padding: EdgeInsets.only(top: SizeConfig.heightMultiplier),

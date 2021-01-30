@@ -4,10 +4,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:gita_app/models/Chapter.dart';
 import 'package:gita_app/models/Verse.dart';
 
-class GitaData {
+class GitaData with ChangeNotifier {
   Map<String, dynamic> gitaData;
 
-  GitaData(this.gitaData);
+  GitaData();
 
   Chapter getChapter(String chapterNumber) {
     Map<String, dynamic> chapterData = gitaData["chapters"];
@@ -56,6 +56,7 @@ class GitaData {
         text: verseData["$verseNumber"]["text"],
         verseNumber: verseData["$verseNumber"]["verse_number"],
         wordMeanings: verseData["$verseNumber"]["word_meanings"],
+        transliteration: verseData["$verseNumber"]["transliteration"] ?? null,
       );
       verseList.add(verse);
     }
@@ -66,9 +67,15 @@ class GitaData {
     return gitaData["chapters"]["$chapterNumber"]["verse_numbers"].length;
   }
 
-  void reloadData(BuildContext context) async {
-    var dataString = await DefaultAssetBundle.of(context).loadString("assets/data/dataset_english.json");
+  void loadData(BuildContext context, bool isHindi) async {
+    String filePath;
+    if (isHindi)
+      filePath = "dataset_hindi.json";
+    else
+      filePath = "dataset_english.json";
+    var dataString = await DefaultAssetBundle.of(context).loadString("assets/data/$filePath");
     gitaData = jsonDecode(dataString);
+    notifyListeners();
   }
 
   String getChapterNumberInHindi(int chapterNumber) {

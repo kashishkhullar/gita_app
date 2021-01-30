@@ -3,6 +3,7 @@ import 'package:gita_app/config/sizing.config.dart';
 import 'package:gita_app/helpers/home.clipper.dart';
 import 'package:gita_app/config/global_strings.config.dart';
 import 'package:gita_app/models/GitaData.dart';
+import 'package:gita_app/providers/language.provider.dart';
 import 'package:gita_app/screens/chapters.screen.dart';
 import 'package:gita_app/widgets/app_drawer.widget.dart';
 import 'package:provider/provider.dart';
@@ -37,6 +38,8 @@ class HomeScreen extends StatelessWidget {
   }
 
   RaisedButton buildListButton(BuildContext context) {
+    LanguageProvider languageProvider = Provider.of<LanguageProvider>(context);
+
     return RaisedButton(
       onPressed: () {
         Navigator.of(context).pushNamed(ChaptersScreen.routeName);
@@ -46,7 +49,7 @@ class HomeScreen extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.all(SizeConfig.heightMultiplier),
         child: Text(
-          GlobalStrings.chapterList,
+          GlobalStrings.data[languageProvider.currentLanguage]["chapterList"],
           style: Theme.of(context).textTheme.button,
         ),
       ),
@@ -54,10 +57,11 @@ class HomeScreen extends StatelessWidget {
   }
 
   Container buildAboutBody(BuildContext context) {
+    LanguageProvider languageProvider = Provider.of<LanguageProvider>(context);
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 2.5 * SizeConfig.textMultiplier),
       child: Text(
-        GlobalStrings.aboutGita,
+        GlobalStrings.data[languageProvider.currentLanguage]["aboutGita"],
         style: Theme.of(context).textTheme.bodyText1,
         textAlign: TextAlign.center,
       ),
@@ -65,18 +69,21 @@ class HomeScreen extends StatelessWidget {
   }
 
   ClipPath buildClippedTitle(BuildContext context) {
+    LanguageProvider languageProvider = Provider.of<LanguageProvider>(context);
+
     return ClipPath(
       clipper: TopClipper(),
       child: Container(
-        height: SizeConfig.isPotrait() ? 35 * SizeConfig.heightMultiplier : 30 * SizeConfig.heightMultiplier,
+        height: SizeConfig.isPotrait() ? 40 * SizeConfig.heightMultiplier : 30 * SizeConfig.heightMultiplier,
         padding: EdgeInsets.only(bottom: 4 * SizeConfig.heightMultiplier),
         decoration: BoxDecoration(
           color: Theme.of(context).primaryColor,
         ),
         child: Center(
           child: Text(
-            GlobalStrings.srimadBhagwatGita,
+            GlobalStrings.data[languageProvider.currentLanguage]["shrimadBhagwatGita"],
             style: Theme.of(context).textTheme.headline1,
+            textAlign: TextAlign.center,
           ),
         ),
       ),

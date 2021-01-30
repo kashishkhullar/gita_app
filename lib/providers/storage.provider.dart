@@ -14,6 +14,17 @@ class StorageProvider {
     return _storage;
   }
 
+  bool get isHindi {
+    if (!_preferences.containsKey("isHindi")) {
+      setLanguage(isHindi: true);
+    }
+    return _preferences.getBool("isHindi");
+  }
+
+  void setLanguage({bool isHindi}) {
+    _preferences.setBool("isHindi", isHindi);
+  }
+
   bool get isDarkTheme {
     if (!_preferences.containsKey("isDark")) {
       setTheme(isDark: false);

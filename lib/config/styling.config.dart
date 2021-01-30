@@ -4,7 +4,7 @@ import 'package:gita_app/config/sizing.config.dart';
 class AppTheme {
   // Light Theme
 
-  static final ThemeData lightTheme = ThemeData(
+  static final ThemeData lightThemeHI = ThemeData(
     scaffoldBackgroundColor: appBackgroundColorLight,
     brightness: Brightness.light,
     primarySwatch: Colors.amber,
@@ -31,6 +31,7 @@ class AppTheme {
     bodyText2: _bodyTextLight2,
     overline: _overlineLight,
     button: _buttonLight,
+    caption: _captionLight,
   );
 
   static final TextStyle _headlineLight1 = TextStyle(
@@ -87,7 +88,7 @@ class AppTheme {
 
   static final TextStyle _buttonLight = TextStyle(
     color: Colors.white,
-    fontSize: 3 * SizeConfig.textMultiplier,
+    fontSize: 2.5 * SizeConfig.textMultiplier,
   );
 
   static final TextStyle _overlineLight = TextStyle(
@@ -96,11 +97,13 @@ class AppTheme {
     fontWeight: FontWeight.bold,
   );
 
+  static final TextStyle _captionLight = TextStyle(color: Colors.grey);
+
   static final IconThemeData _iconThemeDataLight = IconThemeData(color: Colors.white);
 
   // Dark Theme
 
-  static final ThemeData darkTheme = ThemeData(
+  static final ThemeData darkThemeHI = ThemeData(
     scaffoldBackgroundColor: appBackgroundColorDark,
     brightness: Brightness.dark,
     primarySwatch: Colors.amber,
@@ -130,6 +133,7 @@ class AppTheme {
     bodyText2: _bodyTextDark2,
     overline: _overlineLight,
     button: _buttonDark,
+    caption: _captionDark,
   );
 
   static final IconThemeData _iconThemeDataDark = IconThemeData(color: Colors.amber[800]);
@@ -151,4 +155,40 @@ class AppTheme {
   static final TextStyle _bodyTextDark2 = _bodyTextLight2.copyWith(color: Colors.white);
 
   static final TextStyle _buttonDark = _buttonLight.copyWith(color: Colors.white);
+
+  static final TextStyle _captionDark = _captionLight;
+
+  // English Theme
+
+  static final ThemeData lightThemeEN = lightThemeHI.copyWith(textTheme: _lightTextThemeEN);
+
+  static final TextTheme _lightTextThemeEN = TextTheme(
+    headline1: _headlineLight1.copyWith(fontSize: 5.2 * SizeConfig.textMultiplier),
+    headline2: _headlineLight2.copyWith(fontSize: 6 * SizeConfig.textMultiplier),
+    headline3: _headlineLight3.copyWith(fontSize: 5 * SizeConfig.textMultiplier),
+    headline4: _headlineLight4.copyWith(fontSize: 3.5 * SizeConfig.textMultiplier),
+    headline5: _headlineLight5,
+    headline6: _headlineLight6,
+    bodyText1: _bodyTextLight1,
+    bodyText2: _bodyTextLight2,
+    overline: _overlineLight,
+    button: _buttonLight,
+    caption: _captionLight,
+  );
+
+  static final ThemeData darkThemeEN = darkThemeHI.copyWith(textTheme: _darkTextThemeEN);
+
+  static final TextTheme _darkTextThemeEN = TextTheme(
+    headline1: _headlineDark1.copyWith(fontSize: 5.2 * SizeConfig.textMultiplier),
+    headline2: _headlineDark2.copyWith(fontSize: 6 * SizeConfig.textMultiplier),
+    headline3: _headlineDark3.copyWith(fontSize: 5 * SizeConfig.textMultiplier),
+    headline4: _headlineDark4.copyWith(fontSize: 3.5 * SizeConfig.textMultiplier),
+    headline5: _headlineDark5,
+    headline6: _headlineDark6,
+    bodyText1: _bodyTextDark1,
+    bodyText2: _bodyTextDark2,
+    overline: _overlineLight,
+    button: _buttonDark,
+    caption: _captionDark,
+  );
 }

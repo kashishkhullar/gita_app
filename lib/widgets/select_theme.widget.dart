@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gita_app/config/global_strings.config.dart';
 import 'package:gita_app/config/sizing.config.dart';
+import 'package:gita_app/providers/language.provider.dart';
 import 'package:gita_app/providers/theme.provider.dart';
 import 'package:provider/provider.dart';
 
@@ -11,9 +12,11 @@ class SelectThemeDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final LanguageProvider languageProvider = Provider.of<LanguageProvider>(context);
+
     return SimpleDialog(
       title: Text(
-        GlobalStrings.theme,
+        GlobalStrings.data[languageProvider.currentLanguage]["theme"],
         textAlign: TextAlign.center,
         style: Theme.of(context).textTheme.headline6,
       ),

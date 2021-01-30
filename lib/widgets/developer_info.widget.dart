@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:gita_app/config/global_strings.config.dart';
 import 'package:gita_app/config/sizing.config.dart';
+import 'package:gita_app/providers/language.provider.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DeveloperInfoDialog extends StatelessWidget {
@@ -21,13 +23,14 @@ class DeveloperInfoDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final LanguageProvider languageProvider = Provider.of<LanguageProvider>(context);
+
     return SimpleDialog(
       title: Text(
-        GlobalStrings.aboutDeveloper,
+        GlobalStrings.data[languageProvider.currentLanguage]["aboutDeveloper"],
         textAlign: TextAlign.center,
         style: Theme.of(context).textTheme.headline6,
       ),
-      titlePadding: EdgeInsets.all(4 * SizeConfig.heightMultiplier),
       children: [
         Container(
           padding: EdgeInsets.all(2 * SizeConfig.heightMultiplier),
@@ -35,12 +38,12 @@ class DeveloperInfoDialog extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Text(
-                GlobalStrings.developerInfoLine1,
+                GlobalStrings.data[languageProvider.currentLanguage]["developerInfoLine1"],
                 style: Theme.of(context).textTheme.bodyText1,
                 textAlign: TextAlign.center,
               ),
               Text(
-                GlobalStrings.developerInfoLine2,
+                GlobalStrings.data[languageProvider.currentLanguage]["developerInfoLine2"],
                 style: Theme.of(context).textTheme.bodyText1,
                 textAlign: TextAlign.center,
               ),
@@ -52,7 +55,7 @@ class DeveloperInfoDialog extends StatelessWidget {
                 options: LinkifyOptions(humanize: true),
               ),
               Text(
-                GlobalStrings.developerInfoLine3,
+                GlobalStrings.data[languageProvider.currentLanguage]["developerInfoLine3"],
                 style: Theme.of(context).textTheme.bodyText1,
                 textAlign: TextAlign.center,
               ),

@@ -9,17 +9,17 @@ class DataProvider {
 
   String language = "hindi";
 
-  Future<GitaData> loadGitaData(BuildContext context) async {
-    var dataString = await loadAsset(context);
-    Map<String, dynamic> gitaData = jsonDecode(dataString);
+  // Future<GitaData> loadGitaData(BuildContext context) async {
+  //   var dataString = await loadAsset(context);
+  //   Map<String, dynamic> gitaData = jsonDecode(dataString);
 
-    return GitaData(gitaData);
-  }
+  //   return GitaData(gitaData);
+  // }
 
-  Future<String> loadAsset(BuildContext context) async {
-    _assetPath = _assetDir + "dataset_$language.json";
-    return await DefaultAssetBundle.of(context).loadString(_assetPath);
-  }
+  // Future<String> loadAsset(BuildContext context) async {
+  //   _assetPath = _assetDir + "dataset_$language.json";
+  //   return await DefaultAssetBundle.of(context).loadString(_assetPath);
+  // }
 
   void setEnglish() => language = "english";
 

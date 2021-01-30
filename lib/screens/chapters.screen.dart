@@ -4,6 +4,7 @@ import 'package:gita_app/config/global_strings.config.dart';
 import 'package:gita_app/config/sizing.config.dart';
 import 'package:gita_app/models/Chapter.dart';
 import 'package:gita_app/models/GitaData.dart';
+import 'package:gita_app/providers/language.provider.dart';
 import 'package:gita_app/screens/chapter_detail.screen.dart';
 import 'package:provider/provider.dart';
 
@@ -14,6 +15,8 @@ class ChaptersScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final LanguageProvider languageProvider = Provider.of<LanguageProvider>(context);
+
     final gitaData = Provider.of<GitaData>(context);
     final List<Chapter> chapterList = gitaData == null ? [] : gitaData.getChapters();
 
@@ -27,7 +30,7 @@ class ChaptersScreen extends StatelessWidget {
               physics: BouncingScrollPhysics(),
               child: Column(
                 children: <Widget>[
-                  buildTitle(context),
+                  buildTitle(context, languageProvider),
                   buildChapterList(chapterList),
                 ],
               ),
@@ -81,13 +84,15 @@ class ChaptersScreen extends StatelessWidget {
   }
 
   Container buildChapterCardBottom(List<Chapter> chapterList, int index, BuildContext context) {
+    final LanguageProvider languageProvider = Provider.of<LanguageProvider>(context);
+
     return Container(
       height: SizeConfig.isPotrait() ? 22 * SizeConfig.heightMultiplier : 25 * SizeConfig.heightMultiplier,
       padding: EdgeInsets.all(2 * SizeConfig.heightMultiplier),
       child: Column(
         children: [
           Text(
-            "${GlobalStrings.chapter} ${chapterList[index].chapter_number}",
+            "${GlobalStrings.data[languageProvider.currentLanguage]["chapter"]} ${chapterList[index].chapter_number}",
             style: Theme.of(context).textTheme.headline3,
             textAlign: TextAlign.center,
           ),
@@ -121,11 +126,11 @@ class ChaptersScreen extends StatelessWidget {
     );
   }
 
-  Container buildTitle(BuildContext context) {
+  Container buildTitle(BuildContext context, LanguageProvider languageProvider) {
     return Container(
       margin: EdgeInsets.only(top: 14 * SizeConfig.heightMultiplier),
       child: Text(
-        GlobalStrings.chapterList,
+        GlobalStrings.data[languageProvider.currentLanguage]["chapterList"],
         style: Theme.of(context).textTheme.headline2,
         textAlign: TextAlign.center,
       ),

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gita_app/config/sizing.config.dart';
 import 'package:gita_app/config/styling.config.dart';
+import 'package:gita_app/models/GitaData.dart';
 import 'package:gita_app/providers/data.provider.dart';
+import 'package:gita_app/providers/language.provider.dart';
 import 'package:gita_app/providers/progress.provider.dart';
 import 'package:gita_app/providers/storage.provider.dart';
 import 'package:gita_app/providers/theme.provider.dart';
@@ -17,12 +19,28 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  ThemeData getCurrentTheme(BuildContext context, bool isDark) {
+    LanguageProvider languageProvider = Provider.of<LanguageProvider>(context);
+
+    if (isDark) {
+      if (languageProvider.isHindi)
+        return AppTheme.darkThemeHI;
+      else
+        return AppTheme.darkThemeEN;
+    } else {
+      if (languageProvider.isHindi)
+        return AppTheme.lightThemeHI;
+      else
+        return AppTheme.lightThemeEN;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
         FutureProvider(create: (context) => StorageProvider.getStorage()),
-        FutureProvider(create: (context) => DataProvider().loadGitaData(context)),
+        ChangeNotifierProvider(create: (context) => GitaData()),
         ChangeNotifierProxyProvider<StorageProvider, ThemeProvider>(
           create: (context) => ThemeProvider(null),
           update: (context, storageProvider, themeProvider) => ThemeProvider(storageProvider),
@@ -30,6 +48,10 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProxyProvider<StorageProvider, ProgressProvider>(
           create: (context) => ProgressProvider(null),
           update: (context, storageProvider, progressProvider) => ProgressProvider(storageProvider),
+        ),
+        ChangeNotifierProxyProvider<StorageProvider, LanguageProvider>(
+          create: (context) => LanguageProvider(null),
+          update: (context, storageProvider, languageProvider) => LanguageProvider(storageProvider),
         )
       ],
       child: LayoutBuilder(
@@ -37,20 +59,27 @@ class MyApp extends StatelessWidget {
           return OrientationBuilder(
             builder: (context, orientation) {
               SizeConfig().init(constraints, orientation);
-              return Consumer2<StorageProvider, ThemeProvider>(builder: (context, storage, themeProvider, __) {
-                return MaterialApp(
-                  debugShowCheckedModeBanner: false,
-                  title: 'Gita',
-                  theme: themeProvider.isDark ? AppTheme.darkTheme : AppTheme.lightTheme,
-                  home: HomeScreen(),
-                  routes: {
-                    HomeScreen.routeName: (context) => HomeScreen(),
-                    ChaptersScreen.routeName: (context) => ChaptersScreen(),
-                    ChapterDetailScreen.routeName: (context) => ChapterDetailScreen(),
-                    VersesScreen.routeName: (context) => VersesScreen(),
-                  },
-                );
-              });
+              return Consumer2<ThemeProvider, LanguageProvider>(
+                builder: (context, themeProvider, languageProvider, _) {
+                  print("is hindi:" + languageProvider.currentLanguage.toString());
+                  Provider.of<GitaData>(context, listen: false).loadData(context, languageProvider.isHindi);
+
+                  // TODO: change the data in the json file for chapter 1 shloka 5 for both languages
+
+                  return MaterialApp(
+                    debugShowCheckedModeBanner: false,
+                    title: 'Gita',
+                    theme: getCurrentTheme(context, themeProvider.isDark),
+                    home: HomeScreen(),
+                    routes: {
+                      HomeScreen.routeName: (context) => HomeScreen(),
+                      ChaptersScreen.routeName: (context) => ChaptersScreen(),
+                      ChapterDetailScreen.routeName: (context) => ChapterDetailScreen(),
+                      VersesScreen.routeName: (context) => VersesScreen(),
+                    },
+                  );
+                },
+              );
             },
           );
         },

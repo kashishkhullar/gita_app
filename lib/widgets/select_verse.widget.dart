@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gita_app/config/global_strings.config.dart';
+import 'package:gita_app/config/sizing.config.dart';
 import 'package:gita_app/models/GitaData.dart';
+import 'package:gita_app/providers/language.provider.dart';
 import 'package:gita_app/providers/progress.provider.dart';
 import 'package:gita_app/screens/verses.screen.dart';
 import 'package:provider/provider.dart';
@@ -19,9 +21,11 @@ class _SelectVerseDialogState extends State<SelectVerseDialog> {
 
   @override
   Widget build(BuildContext context) {
+    LanguageProvider languageProvider = Provider.of<LanguageProvider>(context);
+
     return SimpleDialog(
       title: Text(
-        GlobalStrings.selectVerse,
+        GlobalStrings.data[languageProvider.currentLanguage]["selectVerse"],
         textAlign: TextAlign.center,
         style: Theme.of(context).textTheme.headline6,
       ),
@@ -82,7 +86,7 @@ class _SelectVerseDialogState extends State<SelectVerseDialog> {
         Container(
           padding: EdgeInsets.symmetric(horizontal: 100),
           child: RaisedButton(
-            // minWidth: 100,
+            padding: EdgeInsets.symmetric(horizontal: SizeConfig.heightMultiplier),
             onPressed: () {
               Provider.of<ProgressProvider>(context, listen: false)
                   .setProgress(int.parse(selectedChapter), int.parse(selectedVerse));
@@ -91,7 +95,7 @@ class _SelectVerseDialogState extends State<SelectVerseDialog> {
             color: Theme.of(context).buttonColor,
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(90)),
             child: Text(
-              "श्लोक पढ़ें",
+              GlobalStrings.data[languageProvider.currentLanguage]["readVerse"],
               style: Theme.of(context).textTheme.button,
             ),
           ),

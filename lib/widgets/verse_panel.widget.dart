@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:gita_app/config/global_strings.config.dart';
 import 'package:gita_app/config/sizing.config.dart';
 import 'package:gita_app/models/Verse.dart';
+import 'package:gita_app/providers/language.provider.dart';
+import 'package:provider/provider.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 // TODO: add transliteration for english, created language provider, shared prefernce to store language
@@ -30,6 +32,8 @@ class _VerseBottomPanelState extends State<VerseBottomPanel> {
 
   @override
   Widget build(BuildContext context) {
+    final LanguageProvider languageProvider = Provider.of<LanguageProvider>(context);
+
     return SlidingUpPanel(
       collapsed: Column(
         children: [
@@ -38,7 +42,7 @@ class _VerseBottomPanelState extends State<VerseBottomPanel> {
             color: Theme.of(context).dividerColor,
           ),
           Text(
-            GlobalStrings.panelText,
+            GlobalStrings.data[languageProvider.currentLanguage]["panelText"],
             style: Theme.of(context).textTheme.overline,
           )
         ],
@@ -61,6 +65,8 @@ class _VerseBottomPanelState extends State<VerseBottomPanel> {
   }
 
   SingleChildScrollView buildPanelContent(BuildContext context, ScrollController sc) {
+    final LanguageProvider languageProvider = Provider.of<LanguageProvider>(context);
+
     return SingleChildScrollView(
       physics: BouncingScrollPhysics(),
       controller: sc,
@@ -77,7 +83,7 @@ class _VerseBottomPanelState extends State<VerseBottomPanel> {
               child: Column(
                 children: [
                   Text(
-                    GlobalStrings.verse,
+                    GlobalStrings.data[languageProvider.currentLanguage]["verse"],
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.headline2,
                   ),
@@ -90,12 +96,35 @@ class _VerseBottomPanelState extends State<VerseBottomPanel> {
                 ],
               ),
             ),
+            !languageProvider.isHindi
+                ? Container(
+                    padding: EdgeInsets.symmetric(horizontal: 1 * SizeConfig.heightMultiplier),
+                    child: Column(
+                      children: [
+                        Text(
+                          GlobalStrings.data[languageProvider.currentLanguage]["transliteration"],
+                          textAlign: TextAlign.center,
+                          style: Theme.of(context).textTheme.headline2,
+                        ),
+                        Text(
+                          widget.verseList[widget._pageNumber].transliteration,
+                          textAlign: TextAlign.center,
+                          style: Theme.of(context).textTheme.bodyText2.copyWith(
+                                fontSize: 2.5 * SizeConfig.textMultiplier,
+                                fontStyle: FontStyle.italic,
+                              ),
+                        ),
+                        Padding(padding: EdgeInsets.symmetric(vertical: 3 * SizeConfig.heightMultiplier))
+                      ],
+                    ),
+                  )
+                : SizedBox.shrink(),
             Container(
               padding: EdgeInsets.symmetric(horizontal: 1 * SizeConfig.heightMultiplier),
               child: Column(
                 children: [
                   Text(
-                    GlobalStrings.meaning,
+                    GlobalStrings.data[languageProvider.currentLanguage]["meaning"],
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.headline2,
                   ),
@@ -113,7 +142,7 @@ class _VerseBottomPanelState extends State<VerseBottomPanel> {
               child: Column(
                 children: [
                   Text(
-                    GlobalStrings.translation,
+                    GlobalStrings.data[languageProvider.currentLanguage]["translation"],
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.headline2,
                   ),

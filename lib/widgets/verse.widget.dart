@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:gita_app/config/global_strings.config.dart';
 import 'package:gita_app/config/sizing.config.dart';
 import 'package:gita_app/models/Verse.dart';
+import 'package:gita_app/providers/language.provider.dart';
+import 'package:provider/provider.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 class VerseCard extends StatelessWidget {
@@ -17,6 +19,7 @@ class VerseCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final LanguageProvider languageProvider = Provider.of<LanguageProvider>(context);
     return Card(
       color: Theme.of(context).cardColor,
       margin: EdgeInsets.symmetric(vertical: 9 * SizeConfig.heightMultiplier),
@@ -32,18 +35,17 @@ class VerseCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Container(
-              padding:
-                  EdgeInsets.symmetric(vertical: SizeConfig.heightMultiplier),
+              padding: EdgeInsets.symmetric(vertical: SizeConfig.heightMultiplier),
               child: Text(
-                "${GlobalStrings.verse} ${verse.verseNumber}",
+                "${GlobalStrings.data[languageProvider.currentLanguage]["verse"]} ${verse.verseNumber}",
                 style: TextStyle(
-                    fontSize: 8 * SizeConfig.textMultiplier,
-                    color: Theme.of(context).primaryColorDark),
+                  fontSize: languageProvider.isHindi ? 8 * SizeConfig.textMultiplier : 6 * SizeConfig.textMultiplier,
+                  color: Theme.of(context).primaryColorDark,
+                ),
               ),
             ),
             Container(
-              margin:
-                  EdgeInsets.symmetric(horizontal: SizeConfig.heightMultiplier),
+              margin: EdgeInsets.symmetric(horizontal: SizeConfig.heightMultiplier),
               child: FittedBox(
                 fit: BoxFit.cover,
                 child: Text(

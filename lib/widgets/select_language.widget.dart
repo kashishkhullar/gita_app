@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gita_app/config/global_strings.config.dart';
 import 'package:gita_app/config/sizing.config.dart';
+import 'package:gita_app/providers/language.provider.dart';
+import 'package:provider/provider.dart';
 
 class SelectLanguageDialog extends StatelessWidget {
   const SelectLanguageDialog({
@@ -9,9 +11,12 @@ class SelectLanguageDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final LanguageProvider languageProvider = Provider.of<LanguageProvider>(context);
+    final bool isHindi = languageProvider.isHindi;
+
     return SimpleDialog(
       title: Text(
-        GlobalStrings.language,
+        GlobalStrings.data[languageProvider.currentLanguage]["language"],
         textAlign: TextAlign.center,
         style: Theme.of(context).textTheme.headline6,
       ),
@@ -21,14 +26,53 @@ class SelectLanguageDialog extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Text(
-                "यह सुविधा जल्द ही उपलब्ध होगी।",
-                style: Theme.of(context).textTheme.bodyText1,
-              ),
-              Text(
-                "This feature will be available soon",
-                style: Theme.of(context).textTheme.bodyText1,
-              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  InkWell(
+                    onTap: () => languageProvider.setHindi(),
+                    child: Container(
+                      height: 20 * SizeConfig.heightMultiplier,
+                      width: 20 * SizeConfig.heightMultiplier,
+                      padding: EdgeInsets.all(SizeConfig.heightMultiplier),
+                      decoration: BoxDecoration(
+                        color: isHindi ? Theme.of(context).selectedRowColor : Theme.of(context).dialogBackgroundColor,
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: Center(
+                        child: Text(
+                          "अ",
+                          style: TextStyle(
+                            fontSize: 10 * SizeConfig.textMultiplier,
+                            color: Theme.of(context).primaryColorDark,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () => languageProvider.setEnglish(),
+                    child: Container(
+                      height: 20 * SizeConfig.heightMultiplier,
+                      width: 20 * SizeConfig.heightMultiplier,
+                      padding: EdgeInsets.all(SizeConfig.heightMultiplier),
+                      decoration: BoxDecoration(
+                        color: !isHindi ? Theme.of(context).selectedRowColor : Theme.of(context).dialogBackgroundColor,
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: Center(
+                        child: Text(
+                          "A",
+                          style: TextStyle(
+                            fontSize: 10 * SizeConfig.textMultiplier,
+                            color: Theme.of(context).primaryColorDark,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              )
             ],
           ),
         ),

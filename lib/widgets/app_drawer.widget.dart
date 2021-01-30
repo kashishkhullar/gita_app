@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gita_app/config/global_strings.config.dart';
 import 'package:gita_app/config/sizing.config.dart';
+import 'package:gita_app/providers/language.provider.dart';
 import 'package:gita_app/screens/chapters.screen.dart';
 import 'package:gita_app/widgets/developer_info.widget.dart';
 import 'package:gita_app/widgets/drawer_tile.widget.dart';
@@ -9,6 +10,7 @@ import 'package:gita_app/widgets/gita_info.widget.dart';
 import 'package:gita_app/widgets/select_language.widget.dart';
 import 'package:gita_app/widgets/select_theme.widget.dart';
 import 'package:gita_app/widgets/select_verse.widget.dart';
+import 'package:provider/provider.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({
@@ -17,6 +19,7 @@ class AppDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    LanguageProvider languageProvider = Provider.of<LanguageProvider>(context);
     return Drawer(
       child: Container(
         color: Theme.of(context).cardColor,
@@ -26,28 +29,28 @@ class AppDrawer extends StatelessWidget {
             buildDrawerImage(),
             buildDrawerTitle(context),
             DrawerTile(
-              title: GlobalStrings.home,
+              title: GlobalStrings.data[languageProvider.currentLanguage]["home"],
               onTap: () {
                 Navigator.of(context).pop();
               },
               icon: Icons.home,
             ),
             DrawerTile(
-              title: GlobalStrings.chapterList,
+              title: GlobalStrings.data[languageProvider.currentLanguage]["chapterList"],
               onTap: () {
                 Navigator.of(context).popAndPushNamed(ChaptersScreen.routeName);
               },
               icon: Icons.list,
             ),
             DrawerTile(
-              title: GlobalStrings.goToVerse,
+              title: GlobalStrings.data[languageProvider.currentLanguage]["goToVerse"],
               onTap: () {
                 showDialog(context: context, child: SelectVerseDialog());
               },
               icon: Icons.forward,
             ),
             DrawerTile(
-              title: GlobalStrings.theme,
+              title: GlobalStrings.data[languageProvider.currentLanguage]["theme"],
               onTap: () {
                 showDialog<void>(
                     //<div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
@@ -57,7 +60,7 @@ class AppDrawer extends StatelessWidget {
               icon: Icons.color_lens,
             ),
             DrawerTile(
-              title: GlobalStrings.language,
+              title: GlobalStrings.data[languageProvider.currentLanguage]["language"],
               onTap: () {
                 showDialog<void>(
                     //<div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
@@ -68,19 +71,19 @@ class AppDrawer extends StatelessWidget {
               icon: Icons.language,
             ),
             DrawerTile(
-                title: GlobalStrings.moreAboutGita,
+                title: GlobalStrings.data[languageProvider.currentLanguage]["moreAboutGita"],
                 onTap: () {
                   showDialog<void>(context: context, builder: (context) => GitaInfoDialog());
                 },
                 icon: Icons.library_books),
             DrawerTile(
-                title: GlobalStrings.aboutDeveloper,
+                title: GlobalStrings.data[languageProvider.currentLanguage]["aboutDeveloper"],
                 onTap: () {
                   showDialog<void>(context: context, builder: (context) => DeveloperInfoDialog());
                 },
                 icon: Icons.developer_board),
             DrawerTile(
-                title: GlobalStrings.appInfo,
+                title: GlobalStrings.data[languageProvider.currentLanguage]["appInfo"],
                 onTap: () {
                   showAboutDialog(
                       context: context,

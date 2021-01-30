@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gita_app/config/global_strings.config.dart';
 import 'package:gita_app/config/sizing.config.dart';
+import 'package:gita_app/providers/language.provider.dart';
+import 'package:provider/provider.dart';
 
 class GitaInfoDialog extends StatelessWidget {
   const GitaInfoDialog({
@@ -9,9 +11,11 @@ class GitaInfoDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final LanguageProvider languageProvider = Provider.of<LanguageProvider>(context);
+
     return SimpleDialog(
       title: Text(
-        GlobalStrings.moreAboutGita,
+        GlobalStrings.data[languageProvider.currentLanguage]["moreAboutGita"],
         textAlign: TextAlign.center,
         style: Theme.of(context).textTheme.headline6,
       ),
@@ -22,22 +26,17 @@ class GitaInfoDialog extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Text(
-                GlobalStrings.moreAboutGitaLine1,
+                GlobalStrings.data[languageProvider.currentLanguage]["moreAboutGitaLine1"],
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.bodyText2,
               ),
               Text(
-                GlobalStrings.moreAboutGitaLine2,
+                GlobalStrings.data[languageProvider.currentLanguage]["moreAboutGitaLine2"],
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.bodyText2,
               ),
               Text(
-                GlobalStrings.moreAboutGitaLine3,
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.bodyText2,
-              ),
-              Text(
-                GlobalStrings.moreAboutGitaLine4,
+                GlobalStrings.data[languageProvider.currentLanguage]["moreAboutGitaLine3"],
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.bodyText2,
               ),
