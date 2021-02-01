@@ -31,10 +31,12 @@ class SelectLanguageDialog extends StatelessWidget {
                 children: [
                   InkWell(
                     onTap: () => languageProvider.setHindi(),
+                    borderRadius: BorderRadius.circular(15),
                     child: Container(
-                      height: 20 * SizeConfig.heightMultiplier,
-                      width: 20 * SizeConfig.heightMultiplier,
+                      height: 15 * SizeConfig.heightMultiplier,
+                      width: 15 * SizeConfig.heightMultiplier,
                       padding: EdgeInsets.all(SizeConfig.heightMultiplier),
+                      margin: EdgeInsets.all(SizeConfig.heightMultiplier),
                       decoration: BoxDecoration(
                         color: isHindi ? Theme.of(context).selectedRowColor : Theme.of(context).dialogBackgroundColor,
                         borderRadius: BorderRadius.circular(15),
@@ -52,10 +54,12 @@ class SelectLanguageDialog extends StatelessWidget {
                   ),
                   InkWell(
                     onTap: () => languageProvider.setEnglish(),
+                    borderRadius: BorderRadius.circular(15),
                     child: Container(
-                      height: 20 * SizeConfig.heightMultiplier,
-                      width: 20 * SizeConfig.heightMultiplier,
+                      height: 15 * SizeConfig.heightMultiplier,
+                      width: 15 * SizeConfig.heightMultiplier,
                       padding: EdgeInsets.all(SizeConfig.heightMultiplier),
+                      margin: EdgeInsets.all(SizeConfig.heightMultiplier),
                       decoration: BoxDecoration(
                         color: !isHindi ? Theme.of(context).selectedRowColor : Theme.of(context).dialogBackgroundColor,
                         borderRadius: BorderRadius.circular(15),
