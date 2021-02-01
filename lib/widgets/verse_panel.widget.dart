@@ -7,8 +7,6 @@ import 'package:gita_app/providers/language.provider.dart';
 import 'package:provider/provider.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
-// TODO: add transliteration for english, created language provider, shared prefernce to store language
-
 class VerseBottomPanel extends StatefulWidget {
   VerseBottomPanel({
     Key key,

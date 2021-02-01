@@ -64,8 +64,6 @@ class MyApp extends StatelessWidget {
                   print("is hindi:" + languageProvider.currentLanguage.toString());
                   Provider.of<GitaData>(context, listen: false).loadData(context, languageProvider.isHindi);
 
-                  // TODO: change the data in the json file for chapter 1 shloka 5 for both languages
-
                   return MaterialApp(
                     debugShowCheckedModeBanner: false,
                     title: 'Gita',
