@@ -87,7 +87,7 @@ class AppDrawer extends StatelessWidget {
                 onTap: () {
                   showAboutDialog(
                       context: context,
-                      applicationVersion: "1.1.0",
+                      applicationVersion: "1.2.0",
                       applicationIcon: Image.asset(
                         "assets/images/icon.png",
                         fit: BoxFit.cover,
