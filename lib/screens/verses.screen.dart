@@ -92,6 +92,7 @@ class _VersesScreenState extends State<VersesScreen> {
               pc: _pc,
               verseList: verseList,
               pageNumber: _pageNumber,
+              chapterNumber: currentChapterNumber,
             )
           ],
         ),

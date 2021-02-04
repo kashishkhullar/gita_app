@@ -57,6 +57,7 @@ class GitaData with ChangeNotifier {
         verseNumber: verseData["$verseNumber"]["verse_number"],
         wordMeanings: verseData["$verseNumber"]["word_meanings"],
         transliteration: verseData["$verseNumber"]["transliteration"] ?? null,
+        key: verseNumber,
       );
       verseList.add(verse);
     }

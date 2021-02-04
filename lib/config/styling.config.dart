@@ -16,6 +16,7 @@ class AppTheme {
     iconTheme: _iconThemeDataLight,
     dividerColor: Colors.black,
     selectedRowColor: Colors.grey[500],
+    sliderTheme: _sliderThemeDataLight,
   );
 
   static const Color appBackgroundColorLight = Colors.white;
@@ -101,24 +102,38 @@ class AppTheme {
 
   static final IconThemeData _iconThemeDataLight = IconThemeData(color: Colors.white);
 
+  static final SliderThemeData _sliderThemeDataLight = SliderThemeData(
+    thumbColor: Colors.red[600],
+    overlayColor: Colors.amberAccent,
+    activeTickMarkColor: Colors.transparent,
+    inactiveTickMarkColor: Colors.transparent,
+    activeTrackColor: Colors.amber[900],
+    disabledActiveTrackColor: Colors.amber[100],
+    valueIndicatorColor: Colors.grey[200],
+    disabledInactiveTrackColor: Colors.black,
+    disabledInactiveTickMarkColor: Colors.transparent,
+    disabledActiveTickMarkColor: Colors.transparent,
+    inactiveTrackColor: Colors.amber[100],
+  );
+
   // Dark Theme
 
   static final ThemeData darkThemeHI = ThemeData(
-    scaffoldBackgroundColor: appBackgroundColorDark,
-    brightness: Brightness.dark,
-    primarySwatch: Colors.amber,
-    primaryColor: Color.fromRGBO(18, 18, 18, 1),
-    primaryColorLight: Colors.white,
-    primaryColorDark: Colors.white,
-    accentColor: Colors.amber[300],
-    textTheme: _darkTextTheme,
-    cardColor: Color.fromRGBO(18, 18, 18, 1),
-    buttonColor: Colors.orange[900],
-    focusColor: Colors.white,
-    iconTheme: _iconThemeDataDark,
-    dividerColor: Colors.white,
-    selectedRowColor: Colors.grey[500],
-  );
+      scaffoldBackgroundColor: appBackgroundColorDark,
+      brightness: Brightness.dark,
+      primarySwatch: Colors.amber,
+      primaryColor: Color.fromRGBO(18, 18, 18, 1),
+      primaryColorLight: Colors.white,
+      primaryColorDark: Colors.white,
+      accentColor: Colors.amber[300],
+      textTheme: _darkTextTheme,
+      cardColor: Color.fromRGBO(18, 18, 18, 1),
+      buttonColor: Colors.orange[900],
+      focusColor: Colors.white,
+      iconTheme: _iconThemeDataDark,
+      dividerColor: Colors.white,
+      selectedRowColor: Colors.grey[500],
+      sliderTheme: _sliderThemeDataDark);
 
   static final Color appBackgroundColorDark = Colors.grey[900];
 
@@ -157,6 +172,20 @@ class AppTheme {
   static final TextStyle _buttonDark = _buttonLight.copyWith(color: Colors.white);
 
   static final TextStyle _captionDark = _captionLight;
+
+  static final SliderThemeData _sliderThemeDataDark = SliderThemeData(
+    thumbColor: Colors.grey,
+    overlayColor: Colors.grey[400],
+    activeTickMarkColor: Colors.transparent,
+    inactiveTickMarkColor: Colors.transparent,
+    activeTrackColor: Colors.grey[600],
+    disabledActiveTrackColor: Colors.grey[100],
+    valueIndicatorColor: Colors.grey[200],
+    disabledInactiveTrackColor: Colors.black,
+    disabledInactiveTickMarkColor: Colors.transparent,
+    disabledActiveTickMarkColor: Colors.transparent,
+    inactiveTrackColor: Colors.grey[800],
+  );
 
   // English Theme
 

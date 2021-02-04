@@ -4,6 +4,7 @@ import 'package:gita_app/config/global_strings.config.dart';
 import 'package:gita_app/config/sizing.config.dart';
 import 'package:gita_app/models/Verse.dart';
 import 'package:gita_app/providers/language.provider.dart';
+import 'package:gita_app/widgets/audio_player.widget.dart';
 import 'package:provider/provider.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
@@ -13,6 +14,7 @@ class VerseBottomPanel extends StatefulWidget {
     @required PanelController pc,
     @required this.verseList,
     @required int pageNumber,
+    this.chapterNumber,
   })  : _pc = pc,
         _pageNumber = pageNumber,
         super(key: key);
@@ -20,6 +22,7 @@ class VerseBottomPanel extends StatefulWidget {
   final PanelController _pc;
   final List<Verse> verseList;
   final int _pageNumber;
+  final int chapterNumber;
 
   @override
   _VerseBottomPanelState createState() => _VerseBottomPanelState();
@@ -56,14 +59,16 @@ class _VerseBottomPanelState extends State<VerseBottomPanel> {
       maxHeight: SizeConfig.isPotrait() ? 70 * SizeConfig.heightMultiplier : 50 * SizeConfig.heightMultiplier,
       panelBuilder: (sc) {
         _sc = sc;
-        return buildPanelContent(context, sc);
+        return buildPanelContent(context, sc, widget.chapterNumber, widget._pageNumber);
       },
       borderRadius: BorderRadius.only(topLeft: Radius.circular(50), topRight: Radius.circular(50)),
     );
   }
 
-  SingleChildScrollView buildPanelContent(BuildContext context, ScrollController sc) {
+  SingleChildScrollView buildPanelContent(BuildContext context, ScrollController sc, int chapterNumber, int pageNumber) {
     final LanguageProvider languageProvider = Provider.of<LanguageProvider>(context);
+
+    print("panel called");
 
     return SingleChildScrollView(
       physics: BouncingScrollPhysics(),
@@ -77,7 +82,7 @@ class _VerseBottomPanelState extends State<VerseBottomPanel> {
           children: <Widget>[
             Padding(padding: EdgeInsets.symmetric(vertical: 3 * SizeConfig.heightMultiplier)),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 1 * SizeConfig.heightMultiplier),
+              padding: EdgeInsets.symmetric(horizontal: SizeConfig.heightMultiplier),
               child: Column(
                 children: [
                   Text(
@@ -90,10 +95,15 @@ class _VerseBottomPanelState extends State<VerseBottomPanel> {
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.bodyText1,
                   ),
-                  Padding(padding: EdgeInsets.symmetric(vertical: 3 * SizeConfig.heightMultiplier))
+                  Padding(padding: EdgeInsets.symmetric(vertical: 1.5 * SizeConfig.heightMultiplier))
                 ],
               ),
             ),
+            new GitaAudioPlayer(
+              fileName: "${chapterNumber}_${widget.verseList[widget._pageNumber].key}.mp3",
+              width: 30 * SizeConfig.heightMultiplier,
+            ),
+            Padding(padding: EdgeInsets.symmetric(vertical: 1.5 * SizeConfig.heightMultiplier)),
             !languageProvider.isHindi
                 ? Container(
                     padding: EdgeInsets.symmetric(horizontal: 1 * SizeConfig.heightMultiplier),
@@ -152,6 +162,7 @@ class _VerseBottomPanelState extends State<VerseBottomPanel> {
                 ],
               ),
             ),
+            Padding(padding: EdgeInsets.symmetric(vertical: SizeConfig.heightMultiplier))
           ],
         ),
       ),
