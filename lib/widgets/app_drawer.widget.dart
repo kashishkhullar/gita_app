@@ -10,6 +10,7 @@ import 'package:gita_app/widgets/gita_info.widget.dart';
 import 'package:gita_app/widgets/select_language.widget.dart';
 import 'package:gita_app/widgets/select_theme.widget.dart';
 import 'package:gita_app/widgets/select_verse.widget.dart';
+import 'package:gita_app/widgets/view_progress.widget.dart';
 import 'package:provider/provider.dart';
 
 class AppDrawer extends StatelessWidget {
@@ -20,6 +21,7 @@ class AppDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     LanguageProvider languageProvider = Provider.of<LanguageProvider>(context);
+
     return Drawer(
       child: Container(
         color: Theme.of(context).cardColor,
@@ -48,6 +50,13 @@ class AppDrawer extends StatelessWidget {
                 showDialog(context: context, child: SelectVerseDialog());
               },
               icon: Icons.forward,
+            ),
+            DrawerTile(
+              title: GlobalStrings.data[languageProvider.currentLanguage]["progress"],
+              onTap: () {
+                showDialog(context: context, child: ViewProgress());
+              },
+              icon: Icons.stacked_line_chart,
             ),
             DrawerTile(
               title: GlobalStrings.data[languageProvider.currentLanguage]["theme"],

@@ -44,6 +44,7 @@ class _VersesScreenState extends State<VersesScreen> {
     final ProgressProvider progress = Provider.of<ProgressProvider>(context, listen: false);
 
     _pageNumber = progress.getProgress(currentChapterNumber);
+    progress.setRead(currentChapterNumber, _pageNumber + 1);
 
     return WillPopScope(
       onWillPop: () async {

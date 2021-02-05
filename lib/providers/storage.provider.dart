@@ -1,4 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:convert';
 
 class StorageProvider {
   static StorageProvider _storage;
@@ -45,5 +46,36 @@ class StorageProvider {
       setProgress(chapterNumber, 0);
     }
     return _preferences.getInt("$chapterNumber");
+  }
+
+  void resetProgress() {
+    for (var i = 1; i <= 18; i++) {
+      _preferences.setInt("i", 0);
+    }
+  }
+
+  int getReadCount(int chapterNumber) {
+    if (!_preferences.containsKey("read_$chapterNumber")) {
+      _preferences.setStringList("read_$chapterNumber", []);
+    }
+    return _preferences.getStringList("read_$chapterNumber").length;
+  }
+
+  void setRead(int chapterNumber, int verseNumber) {
+    if (!_preferences.containsKey("read_$chapterNumber")) {
+      _preferences.setStringList("read_$chapterNumber", []);
+    } else {
+      final List<String> currentRead = _preferences.getStringList("read_$chapterNumber");
+      if (currentRead.indexOf(verseNumber.toString()) == -1) {
+        currentRead.add(verseNumber.toString());
+        _preferences.setStringList("read_$chapterNumber", currentRead);
+      }
+    }
+  }
+
+  void resetReadCount() {
+    for (var i = 1; i <= 18; i++) {
+      _preferences.setInt("read_$i", 0);
+    }
   }
 }
