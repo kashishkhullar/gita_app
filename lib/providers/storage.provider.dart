@@ -50,15 +50,19 @@ class StorageProvider {
 
   void resetProgress() {
     for (var i = 1; i <= 18; i++) {
-      _preferences.setInt("i", 0);
+      _preferences.setInt("$i", 0);
     }
   }
 
-  int getReadCount(int chapterNumber) {
+  void resetChapterProgress(int chapterNumber) {
+    _preferences.setInt("$chapterNumber", 0);
+  }
+
+  List<String> getReadCount(int chapterNumber) {
     if (!_preferences.containsKey("read_$chapterNumber")) {
       _preferences.setStringList("read_$chapterNumber", []);
     }
-    return _preferences.getStringList("read_$chapterNumber").length;
+    return _preferences.getStringList("read_$chapterNumber");
   }
 
   void setRead(int chapterNumber, int verseNumber) {
@@ -75,7 +79,11 @@ class StorageProvider {
 
   void resetReadCount() {
     for (var i = 1; i <= 18; i++) {
-      _preferences.setInt("read_$i", 0);
+      _preferences.setStringList("read_$i", []);
     }
+  }
+
+  void resetChapterReadCount(int chapterNumber) {
+    _preferences.setStringList("read_$chapterNumber", []);
   }
 }

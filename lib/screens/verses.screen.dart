@@ -38,13 +38,13 @@ class _VersesScreenState extends State<VersesScreen> {
   Widget build(BuildContext context) {
     int currentChapterNumber = ModalRoute.of(context).settings.arguments;
 
-    final gitaData = Provider.of<GitaData>(context, listen: false);
+    final gitaData = Provider.of<GitaData>(context);
     final List<Verse> verseList = gitaData.getVerses(currentChapterNumber);
 
-    final ProgressProvider progress = Provider.of<ProgressProvider>(context, listen: false);
+    final ProgressProvider progress = Provider.of<ProgressProvider>(context);
 
     _pageNumber = progress.getProgress(currentChapterNumber);
-    progress.setRead(currentChapterNumber, _pageNumber + 1);
+    progress.setRead(currentChapterNumber, _pageNumber);
 
     return WillPopScope(
       onWillPop: () async {

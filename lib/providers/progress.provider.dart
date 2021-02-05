@@ -35,11 +35,21 @@ class ProgressProvider extends ChangeNotifier {
     _storageProvider.setProgress(chapterNumber, pageNumber);
   }
 
-  int getReadCount(int chapterNumber) {
+  List<String> getReadCount(int chapterNumber) {
     return _storageProvider.getReadCount(chapterNumber);
   }
 
   void setRead(int chapterNumber, int verseNumber) {
     _storageProvider.setRead(chapterNumber, verseNumber);
+  }
+
+  void resetChapterProgress(int chapterNumber) {
+    _storageProvider.resetChapterProgress(chapterNumber);
+    _storageProvider.resetChapterReadCount(chapterNumber);
+  }
+
+  void resetAll() {
+    _storageProvider.resetProgress();
+    _storageProvider.resetReadCount();
   }
 }
