@@ -61,7 +61,7 @@ class MyApp extends StatelessWidget {
               SizeConfig().init(constraints, orientation);
               return Consumer2<ThemeProvider, LanguageProvider>(
                 builder: (context, themeProvider, languageProvider, _) {
-                  print("is hindi:" + languageProvider.currentLanguage.toString());
+                  print("App Language:" + languageProvider.currentLanguage.toString());
                   Provider.of<GitaData>(context, listen: false).loadData(context, languageProvider.isHindi);
 
                   return MaterialApp(

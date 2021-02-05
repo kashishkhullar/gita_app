@@ -50,7 +50,6 @@ class _SelectVerseDialogState extends State<SelectVerseDialog> {
                   color: Theme.of(context).buttonColor,
                 ),
                 onChanged: (String newValue) {
-                  print(newValue);
                   setState(() {
                     selectedChapter = newValue;
                     selectedVerse = "0";
@@ -88,8 +87,7 @@ class _SelectVerseDialogState extends State<SelectVerseDialog> {
           child: RaisedButton(
             padding: EdgeInsets.symmetric(horizontal: SizeConfig.heightMultiplier),
             onPressed: () {
-              Provider.of<ProgressProvider>(context, listen: false)
-                  .setProgress(int.parse(selectedChapter), int.parse(selectedVerse));
+              Provider.of<ProgressProvider>(context, listen: false).setProgress(int.parse(selectedChapter), int.parse(selectedVerse));
               Navigator.of(context).pushNamed(VersesScreen.routeName, arguments: int.parse(selectedChapter));
             },
             color: Theme.of(context).buttonColor,

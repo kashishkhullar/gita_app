@@ -11,7 +11,6 @@ class GitaData with ChangeNotifier {
 
   Chapter getChapter(String chapterNumber) {
     Map<String, dynamic> chapterData = gitaData["chapters"];
-    print("getchaptercalled");
     var chapter = Chapter(
       chapter_number: chapterData[chapterNumber]["chapter_number"],
       chapter_summary: chapterData[chapterNumber]["chapter_summary"],
@@ -24,7 +23,6 @@ class GitaData with ChangeNotifier {
   }
 
   List<Chapter> getChapters() {
-    print("getchapter s called");
     var chapterList = List<Chapter>();
 
     Map<String, dynamic> chapterData = gitaData["chapters"];

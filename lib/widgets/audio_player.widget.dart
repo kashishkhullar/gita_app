@@ -49,10 +49,8 @@ class _GitaAudioPlayerState extends State<GitaAudioPlayer> with WidgetsBindingOb
 
   Future<int> loadFile() {
     if (_isplaying) _audioPlayer.stop();
-    print("in load");
     return GitaAudioCache.loadFile(widget.fileName)
         .then((value) {
-          print(value);
           _cachedFilePath = value.path;
           return _audioPlayer.setUrl(value.path, isLocal: true);
         })
@@ -134,10 +132,11 @@ class _GitaAudioPlayerState extends State<GitaAudioPlayer> with WidgetsBindingOb
 
   @override
   void didUpdateWidget(covariant GitaAudioPlayer oldWidget) {
-    // TODO: implement didUpdateWidget
     super.didUpdateWidget(oldWidget);
 
     if (oldWidget.fileName != widget.fileName) {
+      stop();
+      _audioPlayer.release();
       loadFile();
     }
   }
@@ -167,12 +166,9 @@ class _GitaAudioPlayerState extends State<GitaAudioPlayer> with WidgetsBindingOb
 
   @override
   Widget build(BuildContext context) {
-    print("in build");
     return FutureBuilder(
       future: _loadFile,
       builder: (context, snapshot) {
-        print(snapshot.data);
-        print(_duration);
         if (snapshot.data == null || _duration.inSeconds == 0)
           return Center(
             child: SpinKitWave(

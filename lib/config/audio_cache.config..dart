@@ -8,7 +8,6 @@ class GitaAudioCache {
   static AudioCache _audioCache;
 
   static init() {
-    print("init");
     if (_audioCache == null) {
       _audioCache = AudioCache(prefix: "assets/audios/");
     }

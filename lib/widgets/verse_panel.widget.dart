@@ -68,14 +68,10 @@ class _VerseBottomPanelState extends State<VerseBottomPanel> {
   SingleChildScrollView buildPanelContent(BuildContext context, ScrollController sc, int chapterNumber, int pageNumber) {
     final LanguageProvider languageProvider = Provider.of<LanguageProvider>(context);
 
-    print("panel called");
-
     return SingleChildScrollView(
       physics: BouncingScrollPhysics(),
       controller: sc,
-      // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       child: Container(
-        // color: Colors.red,
         margin: EdgeInsets.symmetric(horizontal: 3.5 * SizeConfig.heightMultiplier),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -95,10 +91,10 @@ class _VerseBottomPanelState extends State<VerseBottomPanel> {
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.bodyText1,
                   ),
-                  Padding(padding: EdgeInsets.symmetric(vertical: 1.5 * SizeConfig.heightMultiplier))
                 ],
               ),
             ),
+            Padding(padding: EdgeInsets.symmetric(vertical: 1.5 * SizeConfig.heightMultiplier)),
             new GitaAudioPlayer(
               fileName: "${chapterNumber}_${widget.verseList[widget._pageNumber].key}.mp3",
               width: 30 * SizeConfig.heightMultiplier,
@@ -106,7 +102,7 @@ class _VerseBottomPanelState extends State<VerseBottomPanel> {
             Padding(padding: EdgeInsets.symmetric(vertical: 1.5 * SizeConfig.heightMultiplier)),
             !languageProvider.isHindi
                 ? Container(
-                    padding: EdgeInsets.symmetric(horizontal: 1 * SizeConfig.heightMultiplier),
+                    padding: EdgeInsets.symmetric(horizontal: SizeConfig.heightMultiplier),
                     child: Column(
                       children: [
                         Text(
@@ -122,13 +118,13 @@ class _VerseBottomPanelState extends State<VerseBottomPanel> {
                                 fontStyle: FontStyle.italic,
                               ),
                         ),
-                        Padding(padding: EdgeInsets.symmetric(vertical: 3 * SizeConfig.heightMultiplier))
                       ],
                     ),
                   )
                 : SizedBox.shrink(),
+            Padding(padding: EdgeInsets.symmetric(vertical: 1.5 * SizeConfig.heightMultiplier)),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 1 * SizeConfig.heightMultiplier),
+              padding: EdgeInsets.symmetric(horizontal: SizeConfig.heightMultiplier),
               child: Column(
                 children: [
                   Text(
@@ -141,12 +137,12 @@ class _VerseBottomPanelState extends State<VerseBottomPanel> {
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.bodyText1,
                   ),
-                  Padding(padding: EdgeInsets.symmetric(vertical: 3 * SizeConfig.heightMultiplier))
                 ],
               ),
             ),
+            Padding(padding: EdgeInsets.symmetric(vertical: 1.5 * SizeConfig.heightMultiplier)),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 1 * SizeConfig.heightMultiplier),
+              padding: EdgeInsets.symmetric(horizontal: SizeConfig.heightMultiplier),
               child: Column(
                 children: [
                   Text(
@@ -162,7 +158,7 @@ class _VerseBottomPanelState extends State<VerseBottomPanel> {
                 ],
               ),
             ),
-            Padding(padding: EdgeInsets.symmetric(vertical: SizeConfig.heightMultiplier))
+            Padding(padding: EdgeInsets.symmetric(vertical: 1.5 * SizeConfig.heightMultiplier)),
           ],
         ),
       ),
