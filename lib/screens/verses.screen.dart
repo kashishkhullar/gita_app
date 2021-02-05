@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gita_app/config/sizing.config.dart';
-import 'package:gita_app/helpers/home.clipper.dart';
+import 'package:gita_app/helpers/home_clipper.helper.dart';
 import 'package:gita_app/models/GitaData.dart';
 import 'package:gita_app/models/Verse.dart';
 import 'package:gita_app/providers/progress.provider.dart';
@@ -42,7 +42,6 @@ class _VersesScreenState extends State<VersesScreen> {
     final List<Verse> verseList = gitaData.getVerses(currentChapterNumber);
 
     final ProgressProvider progress = Provider.of<ProgressProvider>(context, listen: false);
-    print("get ${progress.getProgress(currentChapterNumber)}");
 
     _pageNumber = progress.getProgress(currentChapterNumber);
 

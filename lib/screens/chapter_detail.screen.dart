@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gita_app/config/global_strings.config.dart';
 import 'package:gita_app/config/sizing.config.dart';
-import 'package:gita_app/helpers/home.clipper.dart';
+import 'package:gita_app/helpers/home_clipper.helper.dart';
 import 'package:gita_app/models/Chapter.dart';
 import 'package:gita_app/models/GitaData.dart';
 import 'package:gita_app/providers/language.provider.dart';
