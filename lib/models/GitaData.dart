@@ -6,6 +6,7 @@ import 'package:gita_app/models/Verse.dart';
 
 class GitaData with ChangeNotifier {
   Map<String, dynamic> gitaData;
+  List<String> hindiNumbers;
 
   GitaData();
 
@@ -87,5 +88,10 @@ class GitaData with ChangeNotifier {
 
   String getVerseNumberInHindi(String chapterNumber, String verseNumber) {
     return gitaData["verses"]["$chapterNumber"]["$verseNumber"]["verse_number"];
+  }
+
+  String getHindiNumber(int number) {
+    if (hindiNumbers == null) hindiNumbers = gitaData["hindi_numbers"].cast<String>();
+    return hindiNumbers[number];
   }
 }
