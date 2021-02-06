@@ -105,10 +105,12 @@ class _VerseBottomPanelState extends State<VerseBottomPanel> {
                     padding: EdgeInsets.symmetric(horizontal: SizeConfig.heightMultiplier),
                     child: Column(
                       children: [
-                        Text(
-                          GlobalStrings.data[languageProvider.currentLanguage]["transliteration"],
-                          textAlign: TextAlign.center,
-                          style: Theme.of(context).textTheme.headline2,
+                        FittedBox(
+                          child: Text(
+                            GlobalStrings.data[languageProvider.currentLanguage]["transliteration"],
+                            textAlign: TextAlign.center,
+                            style: Theme.of(context).textTheme.headline2,
+                          ),
                         ),
                         Text(
                           widget.verseList[widget._pageNumber].transliteration,
@@ -127,10 +129,12 @@ class _VerseBottomPanelState extends State<VerseBottomPanel> {
               padding: EdgeInsets.symmetric(horizontal: SizeConfig.heightMultiplier),
               child: Column(
                 children: [
-                  Text(
-                    GlobalStrings.data[languageProvider.currentLanguage]["meaning"],
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.headline2,
+                  FittedBox(
+                    child: Text(
+                      GlobalStrings.data[languageProvider.currentLanguage]["meaning"],
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.headline2,
+                    ),
                   ),
                   Text(
                     widget.verseList[widget._pageNumber].wordMeanings,

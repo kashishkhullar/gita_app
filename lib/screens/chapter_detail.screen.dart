@@ -77,18 +77,24 @@ class _ChapterDetailScreenState extends State<ChapterDetailScreen> {
                   Padding(
                     padding: EdgeInsets.only(top: SizeConfig.heightMultiplier),
                   ),
-                  Text(
-                    chapter.name,
-                    style: Theme.of(context).textTheme.headline5,
-                    textAlign: TextAlign.center,
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: SizeConfig.heightMultiplier),
+                    child: Text(
+                      chapter.name,
+                      style: Theme.of(context).textTheme.headline5,
+                      textAlign: TextAlign.center,
+                    ),
                   ),
                   Padding(
                     padding: EdgeInsets.only(top: SizeConfig.heightMultiplier),
                   ),
-                  Text(
-                    chapter.name_meaning,
-                    style: Theme.of(context).textTheme.headline6,
-                    textAlign: TextAlign.center,
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: SizeConfig.heightMultiplier),
+                    child: Text(
+                      chapter.name_meaning,
+                      style: Theme.of(context).textTheme.headline6,
+                      textAlign: TextAlign.center,
+                    ),
                   ),
                   Padding(
                     padding: EdgeInsets.only(top: SizeConfig.heightMultiplier),
