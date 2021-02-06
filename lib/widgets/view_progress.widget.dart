@@ -76,7 +76,7 @@ class _ViewProgressState extends State<ViewProgress> {
             Positioned(
               child: Container(
                 width: 40 * SizeConfig.heightMultiplier,
-                height: SizeConfig.isPotrait() ? 40 * SizeConfig.heightMultiplier : 30 * SizeConfig.heightMultiplier,
+                height: SizeConfig.isPotrait() ? 50 * SizeConfig.heightMultiplier : 30 * SizeConfig.heightMultiplier,
                 child: ListView.builder(
                   itemCount: 18,
                   itemBuilder: (context, index) {
